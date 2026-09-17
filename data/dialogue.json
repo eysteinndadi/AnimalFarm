@@ -1,0 +1,45 @@
+{
+  "sheep": {
+    "1": ["We're finally free! No more whips, no more Mr. Jones!"],
+    "2": ["Four legs good, two legs bad! Four legs good, two legs bad!"],
+    "3": ["Four legs good, two legs... better? Is that right? I can't remember anymore."],
+    "4": ["The sheep stares at you in silence."]
+  },
+  "boxer": {
+    "1": ["The hay harvest will be twice as good now that we work for ourselves!"],
+    "2": ["I will work harder. The windmill will be built, you'll see."],
+    "3": ["My hoof hurts... but Napoleon is always right. I will work harder."]
+  },
+  "clover": {
+    "1": ["Comrade, isn't it wonderful? The farm is ours at last."],
+    "2": ["Something about the dogs worries me. And where did Snowball go?"],
+    "3": ["Boxer looks so tired. I told him to rest, but he won't listen."],
+    "4": ["When I look at the pigs now... I can no longer tell them apart from the men."]
+  },
+  "benjamin": {
+    "1": ["Donkeys live a long time. None of you has ever seen a dead donkey."],
+    "2": ["I said nothing before, and I say nothing now."],
+    "3": ["I could read the lettering on that van, if anyone bothered to ask."],
+    "4": ["Nothing ever changes. Donkeys live a long time."]
+  },
+  "squealer": {
+    "1": ["Comrades! Rejoice! Jones is gone forever!"],
+    "2": ["The windmill was Napoleon's idea all along. Snowball stole the plans!"],
+    "3": ["The windmill was destroyed by Snowball's agents in the night. Traitors, all of them!"],
+    "4": ["All animals are equal. Some are simply more equal than others."]
+  },
+  "napoleon": {
+    "1": ["The revolution has only begun, comrade."],
+    "2": ["The farm needs order. My dogs will keep us safe."],
+    "3": ["You have questions? Squealer speaks for me."],
+    "4": ["Napoleon does not look up from his meal."]
+  },
+  "dog": {
+    "2": ["Grrr..."],
+    "3": ["Grrr... grrr..."],
+    "4": ["The dog watches you silently."]
+  },
+  "pig": {
+    "4": ["Why are you staring? Get back to work, comrade."]
+  }
+}

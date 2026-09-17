@@ -2,10 +2,6 @@ import pygame
 
 TILE_SIZE = 16
 
-# Logical screen is 256x192, i.e. 16x12 tiles.
-MAP_WIDTH_TILES = 16
-MAP_HEIGHT_TILES = 12
-
 
 def ease_out(t):
     return 1.0 - (1.0 - t) * (1.0 - t)
@@ -20,8 +16,10 @@ class Player:
     SPEED = 4.0        # tiles per second at full walk speed
     TURN_TIME = 0.1    # seconds a new direction must be held before stepping
 
-    def __init__(self, tile_x, tile_y, solid=None):
+    def __init__(self, tile_x, tile_y, map_width, map_height, solid=None):
         self.solid = solid if solid is not None else set()
+        self.map_width = map_width
+        self.map_height = map_height
         self.tile_x = tile_x
         self.tile_y = tile_y
         self.pos = pygame.Vector2(tile_x * TILE_SIZE, tile_y * TILE_SIZE)
@@ -100,7 +98,7 @@ class Player:
         dx, dy = self._directions[direction]
         nx, ny = self.tile_x + dx, self.tile_y + dy
         if (
-            not (0 <= nx < MAP_WIDTH_TILES and 0 <= ny < MAP_HEIGHT_TILES)
+            not (0 <= nx < self.map_width and 0 <= ny < self.map_height)
             or (nx, ny) in self.solid
         ):
             self.moving = False
@@ -139,17 +137,29 @@ class Player:
             else:
                 self._begin_step(d)
 
+    def tile_in_front(self):
+        dx, dy = self._directions[self.facing]
+        return self.tile_x + dx, self.tile_y + dy
+
+    def teleport(self, tile_x, tile_y):
+        self.tile_x, self.tile_y = tile_x, tile_y
+        self.pos.update(tile_x * TILE_SIZE, tile_y * TILE_SIZE)
+        self.moving = False
+        self.stopping = False
+        self.turn_timer = 0.0
+        self.facing = "down"
+
     @property
     def foot_y(self):
         # Bottom edge of the tile the player stands on; used for y-sorting.
         return self.pos.y + TILE_SIZE
 
-    def draw(self, surface):
+    def draw(self, surface, offset):
         # The sprite is anchored at the bottom of its tile, so it
         # overhangs into the tile above (the "tall sprite" look).
         rect = pygame.Rect(
-            round(self.pos.x),
-            round(self.pos.y) - self.OVERHANG,
+            round(self.pos.x - offset.x),
+            round(self.pos.y - offset.y) - self.OVERHANG,
             self.SPRITE_WIDTH,
             self.SPRITE_HEIGHT,
         )
