@@ -26,13 +26,19 @@ class TileMap:
         self._tiles = {}   # gid -> Surface
         self.solid = set()  # (tx, ty) terrain solidity
         solid_ids = set()
+        groups = {}        # autotile name -> {mask: gid}
+        gid_to_group = {}  # gid -> autotile name
 
         for ts in doc["tilesets"]:
             image = assets.load_image(os.path.normpath(os.path.join(base, ts["image"])))
             for tile in ts.get("tiles", []):
-                for prop in tile.get("properties", []):
-                    if prop["name"] == "solid" and prop["value"]:
-                        solid_ids.add(ts["firstgid"] + tile["id"])
+                props = {p["name"]: p["value"] for p in tile.get("properties", [])}
+                gid = ts["firstgid"] + tile["id"]
+                if props.get("solid"):
+                    solid_ids.add(gid)
+                if "autotile" in props:
+                    groups.setdefault(props["autotile"], {})[props["mask"]] = gid
+                    gid_to_group[gid] = props["autotile"]
             for i in range(ts["tilecount"]):
                 sx = (i % ts["columns"]) * ts["tilewidth"]
                 sy = (i // ts["columns"]) * ts["tileheight"]
@@ -43,7 +49,24 @@ class TileMap:
         for layer in doc["layers"]:
             if layer["type"] != "tilelayer" or not layer.get("visible", True):
                 continue
-            for i, gid in enumerate(layer["data"]):
+            # Autotile fix-up: recompute each fence cell's variant from
+            # which of its orthogonal neighbors belong to the same group.
+            data = layer["data"]
+            if gid_to_group:
+                data = list(data)
+                for i, gid in enumerate(data):
+                    name = gid_to_group.get(gid)
+                    if name is None:
+                        continue
+                    tx, ty = i % self.width, i // self.width
+                    mask = 0
+                    for bit, nx, ny in ((1, tx - 1, ty), (2, tx + 1, ty),
+                                        (4, tx, ty - 1), (8, tx, ty + 1)):
+                        if 0 <= nx < self.width and 0 <= ny < self.height:
+                            if gid_to_group.get(data[ny * self.width + nx]) == name:
+                                mask |= bit
+                    data[i] = groups[name].get(mask, gid)
+            for i, gid in enumerate(data):
                 if gid == 0:
                     continue
                 tx, ty = i % self.width, i // self.width
