@@ -24,6 +24,8 @@ class Game:
         self.window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
         self.screen = pygame.Surface((LOGICAL_WIDTH, LOGICAL_HEIGHT))
 
+        self.grass_tile = pygame.image.load("Images/Grasstile01.png").convert()
+
         self.clock = pygame.time.Clock()
         self.running = True
         self.dt = 0.0
@@ -44,12 +46,9 @@ class Game:
         self.player.update(self.dt, keys)
 
     def render(self):
-        self.screen.fill((24, 24, 32))
-        
-        for x in range(0, LOGICAL_WIDTH, TILE_SIZE):
-            pygame.draw.line(self.screen, (34, 34, 44), (x, 0), (x, LOGICAL_HEIGHT))
         for y in range(0, LOGICAL_HEIGHT, TILE_SIZE):
-            pygame.draw.line(self.screen, (34, 34, 44), (0, y), (LOGICAL_WIDTH, y))
+            for x in range(0, LOGICAL_WIDTH, TILE_SIZE):
+                self.screen.blit(self.grass_tile, (x, y))
         
         # Y-sorted pass: tall things draw back-to-front by their foot y,
         # so the player correctly walks in front of or behind them.
