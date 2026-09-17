@@ -71,6 +71,7 @@ class Game:
             NPC(
                 n["name"], n["id"], n["at"][0], n["at"][1],
                 color=tuple(n.get("color", (180, 180, 200))),
+                sprite=n.get("sprite"),
             )
             for n in cfg["npcs"]
         ]

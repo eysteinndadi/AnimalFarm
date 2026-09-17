@@ -41,5 +41,11 @@
   },
   "pig": {
     "4": ["Why are you staring? Get back to work, comrade."]
+  },
+  "hen": {
+    "1": ["Cluck! No more eggs carted off to market. We keep our own now!"],
+    "2": ["Napoleon wants our eggs for trade with the men. Over my dead body."],
+    "3": ["They cut our rations until we surrendered the eggs. Nine of us died for it."],
+    "4": ["The hen clucks quietly and pecks at the ground."]
   }
 }

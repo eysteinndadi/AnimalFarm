@@ -13,7 +13,7 @@ class Player:
     SPRITE_WIDTH = 16
     SPRITE_HEIGHT = 24               # taller than the tile: pokes out the top
     OVERHANG = SPRITE_HEIGHT - TILE_SIZE
-    SPEED = 4.0        # tiles per second at full walk speed
+    SPEED = 6.5        # tiles per second at full walk speed
     TURN_TIME = 0.1    # seconds a new direction must be held before stepping
 
     def __init__(self, tile_x, tile_y, map_width, map_height, solid=None):

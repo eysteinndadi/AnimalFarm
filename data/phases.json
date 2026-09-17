@@ -47,7 +47,9 @@
       {"name": "Clover", "id": "clover", "at": [30, 36], "color": [160, 120, 90]},
       {"name": "Benjamin", "id": "benjamin", "at": [24, 38], "color": [120, 110, 100]},
       {"name": "Napoleon", "id": "napoleon", "at": [36, 34], "color": [230, 160, 160]},
-      {"name": "Squealer", "id": "squealer", "at": [44, 34], "color": [240, 180, 180]}
+      {"name": "Squealer", "id": "squealer", "at": [44, 34], "color": [240, 180, 180]},
+      {"name": "Hen", "id": "hen", "at": [18, 40], "sprite": "assets/characters/hen.png"},
+      {"name": "Hen", "id": "hen", "at": [21, 41], "sprite": "assets/characters/hen.png"}
     ]
   },
   "2": {
@@ -102,7 +104,9 @@
       {"name": "Napoleon", "id": "napoleon", "at": [38, 48], "color": [230, 160, 160]},
       {"name": "Squealer", "id": "squealer", "at": [42, 48], "color": [240, 180, 180]},
       {"name": "Dog", "id": "dog", "at": [36, 49], "color": [70, 60, 60]},
-      {"name": "Dog", "id": "dog", "at": [44, 49], "color": [70, 60, 60]}
+      {"name": "Dog", "id": "dog", "at": [44, 49], "color": [70, 60, 60]},
+      {"name": "Hen", "id": "hen", "at": [18, 40], "sprite": "assets/characters/hen.png"},
+      {"name": "Hen", "id": "hen", "at": [21, 41], "sprite": "assets/characters/hen.png"}
     ]
   },
   "3": {
@@ -161,7 +165,8 @@
       {"name": "Dog", "id": "dog", "at": [36, 49], "color": [70, 60, 60]},
       {"name": "Dog", "id": "dog", "at": [44, 49], "color": [70, 60, 60]},
       {"name": "Dog", "id": "dog", "at": [36, 8], "color": [70, 60, 60]},
-      {"name": "Dog", "id": "dog", "at": [44, 8], "color": [70, 60, 60]}
+      {"name": "Dog", "id": "dog", "at": [44, 8], "color": [70, 60, 60]},
+      {"name": "Hen", "id": "hen", "at": [18, 40], "sprite": "assets/characters/hen.png"}
     ]
   },
   "4": {
@@ -222,7 +227,8 @@
       {"name": "Pig", "id": "pig", "at": [43, 49], "color": [235, 160, 160]},
       {"name": "Squealer", "id": "squealer", "at": [41, 36], "color": [240, 180, 180]},
       {"name": "Dog", "id": "dog", "at": [38, 58], "color": [70, 60, 60]},
-      {"name": "Dog", "id": "dog", "at": [42, 58], "color": [70, 60, 60]}
+      {"name": "Dog", "id": "dog", "at": [42, 58], "color": [70, 60, 60]},
+      {"name": "Hen", "id": "hen", "at": [18, 40], "sprite": "assets/characters/hen.png"}
     ]
   }
 }

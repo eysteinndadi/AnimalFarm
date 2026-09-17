@@ -1,5 +1,7 @@
 import pygame
 
+import assets
+
 TILE_SIZE = 16
 
 
@@ -57,11 +59,13 @@ class NPC:
 
     SPRITE_HEIGHT = 24
 
-    def __init__(self, name, dialogue_id, tx, ty, color=(180, 180, 200)):
+    def __init__(self, name, dialogue_id, tx, ty, color=(180, 180, 200),
+                 sprite=None):
         self.name = name
         self.dialogue_id = dialogue_id
         self.tx, self.ty = tx, ty
         self.color = color
+        self.sprite = assets.load_image(sprite) if sprite else None
 
     @property
     def foot_y(self):
@@ -74,6 +78,14 @@ class NPC:
     def draw(self, surface, offset):
         x = round(self.tx * TILE_SIZE - offset.x)
         bottom = round((self.ty + 1) * TILE_SIZE - offset.y)
+        if self.sprite:
+            # Anchored bottom-center of the tile, like everything else.
+            surface.blit(
+                self.sprite,
+                (x + (TILE_SIZE - self.sprite.get_width()) // 2,
+                 bottom - self.sprite.get_height()),
+            )
+            return
         body = pygame.Rect(x, bottom - self.SPRITE_HEIGHT, TILE_SIZE, self.SPRITE_HEIGHT)
         pygame.draw.rect(surface, self.color, body)
         head = pygame.Rect(x + 2, bottom - self.SPRITE_HEIGHT, TILE_SIZE - 4, 8)
