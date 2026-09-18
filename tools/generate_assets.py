@@ -31,15 +31,12 @@ FENCE_PARTS = [(4, 2), (1, 0), (2, 1), (8, 3)]  # (mask bit, frame index)
 
 def make_tileset(path):
     grass = pygame.image.load("assets/tiles/grass.png")
-    parts = pygame.image.load("assets/tiles/fence_parts.png")
+    parts = pygame.image.load("assets/tiles/fence_parts_v2.png")
     sheet = pygame.Surface((TILE * TILESET_COLS, TILE), pygame.SRCALPHA)
 
     sheet.blit(grass, (GRASS * TILE, 0))
 
-    dirt = pygame.Surface((TILE, TILE))
-    dirt.fill((150, 110, 70))
-    for px, py in [(3, 4), (10, 9), (6, 12), (13, 3)]:
-        dirt.fill((130, 95, 60), (px, py, 2, 2))
+    dirt = pygame.image.load("assets/tiles/dirt.png")
     sheet.blit(dirt, (DIRT * TILE, 0))
 
     for mask in range(FENCE_COUNT):

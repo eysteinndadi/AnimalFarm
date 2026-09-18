@@ -17,9 +17,10 @@
        "interact": {"event": "message", "text": "The cows low softly. The shed feels like theirs now."}},
       {"name": "stables", "at": [58, 46], "w": 10, "h": 5, "color": [150, 90, 50],
        "interact": {"event": "message", "text": "Boxer's stall, neatly kept."}},
-      {"name": "flagpole", "at": [40, 33], "w": 1, "h": 1, "sprite_h": 32, "color": [200, 60, 60],
+      {"name": "flagpole", "at": [40, 33], "w": 1, "h": 1,
+       "sprite": "assets/props/flag.png", "frame_w": 24, "frame": 0,
        "interact": {"event": "advance_phase"}},
-      {"name": "farmhouse", "at": [34, 50], "w": 12, "h": 6, "color": [170, 150, 110],
+      {"name": "farmhouse", "at": [43, 45], "w": 8, "h": 10, "color": [170, 150, 110],
        "interact": {"event": "message", "text": "The farmhouse stands dark and empty. The animals keep away."}},
       {"name": "tree", "at": [10, 5], "w": 1, "h": 1, "sprite_h": 32, "color": [50, 140, 70]},
       {"name": "tree", "at": [14, 6], "w": 1, "h": 1, "sprite_h": 32, "color": [50, 140, 70]},
@@ -38,7 +39,7 @@
       {"name": "tree", "at": [12, 30], "w": 1, "h": 1, "sprite_h": 32, "color": [50, 140, 70]},
       {"name": "tree", "at": [70, 42], "w": 1, "h": 1, "sprite_h": 32, "color": [50, 140, 70]},
       {"name": "tree", "at": [20, 52], "w": 1, "h": 1, "sprite_h": 32, "color": [50, 140, 70]},
-      {"name": "tree", "at": [50, 52], "w": 1, "h": 1, "sprite_h": 32, "color": [50, 140, 70]}
+      {"name": "tree", "at": [50, 55], "w": 1, "h": 1, "sprite_h": 32, "color": [50, 140, 70]}
     ],
     "npcs": [
       {"name": "Sheep", "id": "sheep", "at": [60, 28], "color": [230, 230, 230]},
@@ -71,9 +72,10 @@
        "interact": {"event": "message", "text": "The cows work their shifts without complaint."}},
       {"name": "stables", "at": [58, 46], "w": 10, "h": 5, "color": [150, 90, 50],
        "interact": {"event": "message", "text": "Boxer's stall. He is rarely here to use it."}},
-      {"name": "flagpole", "at": [40, 33], "w": 1, "h": 1, "sprite_h": 32, "color": [200, 60, 60],
+      {"name": "flagpole", "at": [40, 33], "w": 1, "h": 1,
+       "sprite": "assets/props/flag.png", "frame_w": 24, "frame": 1,
        "interact": {"event": "message", "text": "The green flag of Animal Farm flies over the yard."}},
-      {"name": "farmhouse", "at": [34, 50], "w": 12, "h": 6, "color": [170, 150, 110],
+      {"name": "farmhouse", "at": [43, 45], "w": 8, "h": 10, "color": [170, 150, 110],
        "interact": {"event": "message", "text": "Lamplight glows in the farmhouse windows. The pigs have moved in."}},
       {"name": "windmill_foundation", "at": [36, 5], "w": 8, "h": 3, "color": [140, 140, 145],
        "interact": {"event": "advance_phase"}},
@@ -94,17 +96,17 @@
       {"name": "tree", "at": [12, 30], "w": 1, "h": 1, "sprite_h": 32, "color": [50, 140, 70]},
       {"name": "tree", "at": [70, 42], "w": 1, "h": 1, "sprite_h": 32, "color": [50, 140, 70]},
       {"name": "tree", "at": [20, 52], "w": 1, "h": 1, "sprite_h": 32, "color": [50, 140, 70]},
-      {"name": "tree", "at": [50, 52], "w": 1, "h": 1, "sprite_h": 32, "color": [50, 140, 70]}
+      {"name": "tree", "at": [50, 55], "w": 1, "h": 1, "sprite_h": 32, "color": [50, 140, 70]}
     ],
     "npcs": [
       {"name": "Sheep", "id": "sheep", "at": [60, 28], "color": [230, 230, 230]},
       {"name": "Boxer", "id": "boxer", "at": [36, 9], "color": [120, 80, 50]},
       {"name": "Clover", "id": "clover", "at": [18, 46], "color": [160, 120, 90]},
       {"name": "Benjamin", "id": "benjamin", "at": [24, 38], "color": [120, 110, 100]},
-      {"name": "Napoleon", "id": "napoleon", "at": [38, 48], "color": [230, 160, 160]},
-      {"name": "Squealer", "id": "squealer", "at": [42, 48], "color": [240, 180, 180]},
-      {"name": "Dog", "id": "dog", "at": [36, 49], "color": [70, 60, 60]},
-      {"name": "Dog", "id": "dog", "at": [44, 49], "color": [70, 60, 60]},
+      {"name": "Napoleon", "id": "napoleon", "at": [41, 47], "color": [230, 160, 160]},
+      {"name": "Squealer", "id": "squealer", "at": [41, 53], "color": [240, 180, 180]},
+      {"name": "Dog", "id": "dog", "at": [42, 49], "color": [70, 60, 60]},
+      {"name": "Dog", "id": "dog", "at": [42, 51], "color": [70, 60, 60]},
       {"name": "Hen", "id": "hen", "at": [18, 40], "sprite": "assets/characters/hen.png"},
       {"name": "Hen", "id": "hen", "at": [21, 41], "sprite": "assets/characters/hen.png"}
     ]
@@ -128,12 +130,13 @@
        "interact": {"event": "message", "text": "The cows keep their heads down and say nothing."}},
       {"name": "stables", "at": [58, 46], "w": 10, "h": 5, "color": [140, 85, 48],
        "interact": {"event": "message", "text": "Boxer's stall. His breathing is heavy even in sleep."}},
-      {"name": "flagpole", "at": [40, 33], "w": 1, "h": 1, "sprite_h": 32, "color": [180, 50, 50],
-       "interact": {"event": "message", "text": "The flag still flies, though fewer animals look up at it now."}},
-      {"name": "farmhouse", "at": [34, 50], "w": 12, "h": 6, "color": [170, 150, 110],
+      {"name": "flagpole", "at": [40, 33], "w": 1, "h": 1,
+       "sprite": "assets/props/flag.png", "frame_w": 24, "frame": 2,
+       "interact": {"event": "message", "text": "The flag is still here, although Napoleon now keeps the gun inside the farmhouse."}},
+      {"name": "farmhouse", "at": [43, 45], "w": 8, "h": 10, "color": [170, 150, 110],
        "interact": [
-         {"event": "message", "text": "The curtains are drawn. Laughter and clinking glasses drift from inside.", "tiles": [[35, 50], [36, 50], [37, 50], [38, 50], [39, 50], [41, 50], [42, 50], [43, 50], [44, 50], [45, 50]]},
-         {"event": "advance_phase", "tiles": [[40, 50]]}
+         {"event": "message", "text": "The curtains are drawn. Laughter and clinking glasses drift from inside.", "tiles": [[43, 45], [43, 46], [43, 47], [43, 48], [43, 49], [43, 51], [43, 52], [43, 53], [43, 54]]},
+         {"event": "advance_phase", "tiles": [[43, 50]]}
        ]},
       {"name": "windmill_ruins", "at": [36, 5], "w": 8, "h": 3, "color": [80, 75, 70], "sprite_h": 12,
        "interact": {"event": "message", "text": "The windmill lies in ruins. No one agrees on why."}},
@@ -154,7 +157,7 @@
       {"name": "tree", "at": [12, 30], "w": 1, "h": 1, "sprite_h": 32, "color": [45, 120, 62]},
       {"name": "tree", "at": [70, 42], "w": 1, "h": 1, "sprite_h": 32, "color": [45, 120, 62]},
       {"name": "tree", "at": [20, 52], "w": 1, "h": 1, "sprite_h": 32, "color": [45, 120, 62]},
-      {"name": "tree", "at": [50, 52], "w": 1, "h": 1, "sprite_h": 32, "color": [45, 120, 62]}
+      {"name": "tree", "at": [50, 55], "w": 1, "h": 1, "sprite_h": 32, "color": [45, 120, 62]}
     ],
     "npcs": [
       {"name": "Sheep", "id": "sheep", "at": [60, 28], "color": [220, 220, 220]},
@@ -162,8 +165,8 @@
       {"name": "Clover", "id": "clover", "at": [20, 46], "color": [160, 120, 90]},
       {"name": "Benjamin", "id": "benjamin", "at": [24, 38], "color": [120, 110, 100]},
       {"name": "Squealer", "id": "squealer", "at": [42, 34], "color": [240, 180, 180]},
-      {"name": "Dog", "id": "dog", "at": [36, 49], "color": [70, 60, 60]},
-      {"name": "Dog", "id": "dog", "at": [44, 49], "color": [70, 60, 60]},
+      {"name": "Dog", "id": "dog", "at": [42, 49], "color": [70, 60, 60]},
+      {"name": "Dog", "id": "dog", "at": [42, 51], "color": [70, 60, 60]},
       {"name": "Dog", "id": "dog", "at": [36, 8], "color": [70, 60, 60]},
       {"name": "Dog", "id": "dog", "at": [44, 8], "color": [70, 60, 60]},
       {"name": "Hen", "id": "hen", "at": [18, 40], "sprite": "assets/characters/hen.png"}
@@ -191,12 +194,13 @@
        "interact": {"event": "message", "text": "The cows work in silence. It is just work now."}},
       {"name": "stables", "at": [58, 46], "w": 10, "h": 5, "color": [140, 85, 48],
        "interact": {"event": "message", "text": "Boxer's stall stands empty. No one speaks of where he went."}},
-      {"name": "flagpole", "at": [40, 33], "w": 1, "h": 1, "sprite_h": 32, "color": [160, 60, 60],
-       "interact": {"event": "message", "text": "The flag still flies. The hoof and horn are gone from it."}},
-      {"name": "farmhouse", "at": [34, 50], "w": 12, "h": 6, "color": [190, 165, 120],
+      {"name": "flagpole", "at": [40, 33], "w": 1, "h": 1,
+       "sprite": "assets/props/flag.png", "frame_w": 24, "frame": 3,
+       "interact": {"event": "message", "text": "The flag is still here, although the hoof and horn are now gone from it."}},
+      {"name": "farmhouse", "at": [43, 45], "w": 8, "h": 10, "color": [190, 165, 120],
        "interact": [
-         {"event": "ending", "tiles": [[39, 50]]},
-         {"event": "message", "text": "The door is for pigs and men now.", "tiles": [[35, 50], [36, 50], [37, 50], [38, 50], [40, 50], [41, 50], [42, 50], [43, 50], [44, 50], [45, 50]]}
+         {"event": "ending", "tiles": [[43, 49]]},
+         {"event": "message", "text": "The door is for pigs and men now.", "tiles": [[43, 45], [43, 46], [43, 47], [43, 48], [43, 50], [43, 51], [43, 52], [43, 53], [43, 54]]}
        ]},
       {"name": "windmill", "at": [37, 3], "w": 6, "h": 6, "sprite_h": 64, "color": [150, 150, 158],
        "interact": {"event": "message", "text": "The windmill stands complete, its sails turning slowly."}},
@@ -217,14 +221,14 @@
       {"name": "tree", "at": [12, 30], "w": 1, "h": 1, "sprite_h": 32, "color": [45, 120, 62]},
       {"name": "tree", "at": [70, 42], "w": 1, "h": 1, "sprite_h": 32, "color": [45, 120, 62]},
       {"name": "tree", "at": [20, 52], "w": 1, "h": 1, "sprite_h": 32, "color": [45, 120, 62]},
-      {"name": "tree", "at": [50, 52], "w": 1, "h": 1, "sprite_h": 32, "color": [45, 120, 62]}
+      {"name": "tree", "at": [50, 55], "w": 1, "h": 1, "sprite_h": 32, "color": [45, 120, 62]}
     ],
     "npcs": [
       {"name": "Sheep", "id": "sheep", "at": [60, 28], "color": [220, 220, 220]},
       {"name": "Clover", "id": "clover", "at": [30, 36], "color": [160, 120, 90]},
       {"name": "Benjamin", "id": "benjamin", "at": [24, 38], "color": [120, 110, 100]},
-      {"name": "Pig", "id": "pig", "at": [37, 49], "color": [235, 160, 160]},
-      {"name": "Pig", "id": "pig", "at": [43, 49], "color": [235, 160, 160]},
+      {"name": "Pig", "id": "pig", "at": [42, 47], "color": [235, 160, 160]},
+      {"name": "Pig", "id": "pig", "at": [42, 52], "color": [235, 160, 160]},
       {"name": "Squealer", "id": "squealer", "at": [41, 36], "color": [240, 180, 180]},
       {"name": "Dog", "id": "dog", "at": [38, 58], "color": [70, 60, 60]},
       {"name": "Dog", "id": "dog", "at": [42, 58], "color": [70, 60, 60]},

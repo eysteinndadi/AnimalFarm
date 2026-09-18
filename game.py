@@ -64,6 +64,9 @@ class Game:
                 color=tuple(p.get("color", (120, 90, 60))),
                 sprite_h=p.get("sprite_h"),
                 interact=p.get("interact"),
+                sprite=p.get("sprite"),
+                frame=p.get("frame", 0),
+                frame_w=p.get("frame_w"),
             )
             for p in cfg["props"]
         ]
@@ -162,6 +165,7 @@ class Game:
             keys = pygame.key.get_pressed()
             self.player.update(self.dt, keys)
             self.camera.update(self._camera_target())
+            print(self.player.tile_x, self.player.tile_y)
 
     def render(self):
         self.map.draw_ground(self.screen, self.camera.offset)
