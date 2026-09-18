@@ -39,6 +39,9 @@
     "3": ["Grrr... grrr..."],
     "4": ["The dog watches you silently."]
   },
+  "puppy":{
+    "2":["Woof!"]
+  },
   "pig": {
     "4": ["Why are you staring? Get back to work, comrade."]
   },

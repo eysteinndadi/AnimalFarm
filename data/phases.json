@@ -105,8 +105,8 @@
       {"name": "Benjamin", "id": "benjamin", "at": [24, 38], "color": [120, 110, 100]},
       {"name": "Napoleon", "id": "napoleon", "at": [41, 47], "color": [230, 160, 160]},
       {"name": "Squealer", "id": "squealer", "at": [41, 53], "color": [240, 180, 180]},
-      {"name": "Dog", "id": "dog", "at": [42, 49], "color": [70, 60, 60]},
-      {"name": "Dog", "id": "dog", "at": [42, 51], "color": [70, 60, 60]},
+      {"name": "Dog", "id": "puppy", "at": [42, 49], "color": [70, 60, 60]},
+      {"name": "Dog", "id": "puppy", "at": [42, 51], "color": [70, 60, 60]},
       {"name": "Hen", "id": "hen", "at": [18, 40], "sprite": "assets/characters/hen.png"},
       {"name": "Hen", "id": "hen", "at": [21, 41], "sprite": "assets/characters/hen.png"}
     ]
