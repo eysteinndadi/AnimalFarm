@@ -200,8 +200,8 @@ def main():
     os.chdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     pygame.init()
     make_tileset("assets/tiles/tileset.png")
-    generate_map("data/farm_map.json")
-    print("Wrote assets/tiles/tileset.png and data/farm_map.json")
+    generate_map("data/farm_map_generated.json")
+    print("Wrote assets/tiles/tileset.png and data/farm_map_generated.json")
 
 
 if __name__ == "__main__":

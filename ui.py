@@ -53,8 +53,8 @@ def draw_dialogue_box(surface, speaker, text, scale=1):
         y += 10 * s
 
     surface.blit(
-        font.render("v", True, (200, 200, 200)),
-        (rect.right - 10 * s, rect.bottom - 11 * s),
+        font.render("[E]", True, (200, 200, 200)),
+        (rect.right - 12 * s, rect.bottom - 11 * s),
     )
 
 

@@ -36,7 +36,7 @@ class Game:
         self.running = True
         self.dt = 0.0
 
-        self.map = TileMap("data/farm_map.json")
+        self.map = TileMap("data/farm_map_v2.json")
         self.phases = assets.load_json("data/phases.json")
         self.dialogues = assets.load_json("data/dialogue.json")
         self.camera = Camera(
