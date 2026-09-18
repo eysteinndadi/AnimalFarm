@@ -75,16 +75,25 @@ class Game:
                 n["name"], n["id"], n["at"][0], n["at"][1],
                 color=tuple(n.get("color", (180, 180, 200))),
                 sprite=n.get("sprite"),
+                sprite_moving=n.get("sprite_moving"),
+                patrol=n.get("patrol"),
+                faces_right=n.get("faces_right", False),
+                w=n.get("w", 1),
             )
             for n in cfg["npcs"]
         ]
         self.commandments = cfg.get("commandments", [])
         self.ending_lines = cfg.get("ending", [])
 
-        solid = set(self.map.solid)
-        for entity in (*self.props, *self.npcs):
-            solid |= entity.solid_tiles
-        self.player.solid = solid
+        # Static solidity never changes; patrolling NPCs block via their
+        # occupied tiles, recomputed each frame in update().
+        self.static_solid = set(self.map.solid)
+        for entity in self.props:
+            self.static_solid |= entity.solid_tiles
+        for npc in self.npcs:
+            if npc.patrol is None:
+                self.static_solid |= npc.solid_tiles
+        self.player.solid = set(self.static_solid)
         self.player.teleport(*cfg["spawn"])
         self.camera.update(self._camera_target())
         self.registry = events.build_registry(self.props, self.npcs)
@@ -128,7 +137,19 @@ class Game:
         self.after_scene = None
 
     def _interact(self):
-        action = self.registry.get(self.player.tile_in_front())
+        front = self.player.tile_in_front()
+        # Patrolling NPCs aren't in the registry (they move); check them
+        # by position before the static lookup.
+        for npc in self.npcs:
+            if npc.patrol is not None and front in npc.occupied_tiles:
+                npc.face_toward(self.player.tile_x)
+                lines = self.dialogues.get(npc.dialogue_id, {}).get(
+                    str(self.phase), ["..."]
+                )
+                self.dialogue = DialogueSession(npc.name, lines)
+                self.state = "dialogue"
+                return
+        action = self.registry.get(front)
         if action is None:
             return
         kind = action["type"]
@@ -161,11 +182,22 @@ class Game:
         self.state = "transition"
 
     def update(self):
-        if self.state == "explore":
-            keys = pygame.key.get_pressed()
-            self.player.update(self.dt, keys)
-            self.camera.update(self._camera_target())
-            print(self.player.tile_x, self.player.tile_y)
+        if self.state != "explore":
+            return
+        patrolling = [npc for npc in self.npcs if npc.patrol is not None]
+        player_tile = (self.player.tile_x, self.player.tile_y)
+        for i, npc in enumerate(patrolling):
+            blocked = set(self.static_solid) | {player_tile}
+            for j, other in enumerate(patrolling):
+                if i != j:
+                    blocked |= other.occupied_tiles
+            npc.update(self.dt, blocked)
+        self.player.solid = set(self.static_solid)
+        for npc in patrolling:
+            self.player.solid |= npc.occupied_tiles
+        keys = pygame.key.get_pressed()
+        self.player.update(self.dt, keys)
+        self.camera.update(self._camera_target())
 
     def render(self):
         self.map.draw_ground(self.screen, self.camera.offset)

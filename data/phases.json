@@ -42,9 +42,14 @@
       {"name": "tree", "at": [50, 55], "w": 1, "h": 1, "sprite_h": 32, "color": [50, 140, 70]}
     ],
     "npcs": [
-      {"name": "Sheep", "id": "sheep", "at": [60, 28], "color": [230, 230, 230]},
-      {"name": "Sheep", "id": "sheep", "at": [64, 32], "color": [230, 230, 230]},
-      {"name": "Boxer", "id": "boxer", "at": [66, 44], "color": [120, 80, 50]},
+      {"name": "Sheep", "id": "sheep", "at": [60, 28], "sprite": "assets/characters/sheep.png"},
+      {"name": "Sheep", "id": "sheep", "at": [64, 32], "sprite": "assets/characters/sheep.png"},
+      {"name": "Boxer", "id": "boxer", "at": [66, 44], "color": [120, 80, 50],
+       "sprite": "assets/characters/boxer.png", "faces_right": true, "w": 2},
+      {"name": "Muriel", "id": "muriel", "at": [7, 42],
+       "sprite": "assets/characters/goat_still.png",
+       "sprite_moving": "assets/characters/goat_moving.png",
+       "patrol": [[7, 42], [14, 42]]},
       {"name": "Clover", "id": "clover", "at": [30, 36], "color": [160, 120, 90]},
       {"name": "Benjamin", "id": "benjamin", "at": [24, 38], "color": [120, 110, 100]},
       {"name": "Napoleon", "id": "napoleon", "at": [36, 34], "sprite": "assets/characters/napoleon.png"},
@@ -100,8 +105,13 @@
       {"name": "tree", "at": [50, 55], "w": 1, "h": 1, "sprite_h": 32, "color": [50, 140, 70]}
     ],
     "npcs": [
-      {"name": "Sheep", "id": "sheep", "at": [60, 28], "color": [230, 230, 230]},
-      {"name": "Boxer", "id": "boxer", "at": [36, 9], "color": [120, 80, 50]},
+      {"name": "Sheep", "id": "sheep", "at": [60, 28], "sprite": "assets/characters/sheep.png"},
+      {"name": "Boxer", "id": "boxer", "at": [36, 9], "color": [120, 80, 50],
+       "sprite": "assets/characters/boxer.png", "faces_right": true, "w": 2},
+      {"name": "Muriel", "id": "muriel", "at": [7, 42],
+       "sprite": "assets/characters/goat_still.png",
+       "sprite_moving": "assets/characters/goat_moving.png",
+       "patrol": [[7, 42], [14, 42]]},
       {"name": "Clover", "id": "clover", "at": [18, 46], "color": [160, 120, 90]},
       {"name": "Benjamin", "id": "benjamin", "at": [24, 38], "color": [120, 110, 100]},
       {"name": "Napoleon", "id": "napoleon", "at": [41, 47], "sprite": "assets/characters/napoleon.png"},
@@ -161,8 +171,13 @@
       {"name": "tree", "at": [50, 55], "w": 1, "h": 1, "sprite_h": 32, "color": [45, 120, 62]}
     ],
     "npcs": [
-      {"name": "Sheep", "id": "sheep", "at": [60, 28], "color": [220, 220, 220]},
-      {"name": "Boxer", "id": "boxer", "at": [62, 44], "color": [120, 80, 50]},
+      {"name": "Sheep", "id": "sheep", "at": [60, 28], "sprite": "assets/characters/sheep.png"},
+      {"name": "Boxer", "id": "boxer", "at": [62, 44], "color": [120, 80, 50],
+       "sprite": "assets/characters/boxer.png", "faces_right": true, "w": 2},
+      {"name": "Muriel", "id": "muriel", "at": [7, 42],
+       "sprite": "assets/characters/goat_still.png",
+       "sprite_moving": "assets/characters/goat_moving.png",
+       "patrol": [[7, 42], [14, 42]]},
       {"name": "Clover", "id": "clover", "at": [20, 46], "color": [160, 120, 90]},
       {"name": "Benjamin", "id": "benjamin", "at": [24, 38], "color": [120, 110, 100]},
       {"name": "Squealer", "id": "squealer", "at": [42, 34], "color": [240, 180, 180]},
@@ -225,7 +240,11 @@
       {"name": "tree", "at": [50, 55], "w": 1, "h": 1, "sprite_h": 32, "color": [45, 120, 62]}
     ],
     "npcs": [
-      {"name": "Sheep", "id": "sheep", "at": [60, 28], "color": [220, 220, 220]},
+      {"name": "Sheep", "id": "sheep", "at": [60, 28], "sprite": "assets/characters/sheep.png"},
+      {"name": "Muriel", "id": "muriel", "at": [7, 42],
+       "sprite": "assets/characters/goat_still.png",
+       "sprite_moving": "assets/characters/goat_moving.png",
+       "patrol": [[7, 42], [14, 42]]},
       {"name": "Clover", "id": "clover", "at": [30, 36], "color": [160, 120, 90]},
       {"name": "Benjamin", "id": "benjamin", "at": [24, 38], "color": [120, 110, 100]},
       {"name": "Pig", "id": "pig", "at": [42, 47], "color": [235, 160, 160]},

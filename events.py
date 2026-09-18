@@ -21,9 +21,10 @@ def build_registry(props, npcs):
             for tile in tiles or prop.solid_tiles:
                 registry[tile] = action
     for npc in npcs:
-        registry[(npc.tx, npc.ty)] = {
-            "type": "dialogue",
-            "id": npc.dialogue_id,
-            "speaker": npc.name,
-        }
+        for tile in npc.solid_tiles:
+            registry[tile] = {
+                "type": "dialogue",
+                "id": npc.dialogue_id,
+                "speaker": npc.name,
+            }
     return registry

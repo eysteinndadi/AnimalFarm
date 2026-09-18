@@ -46,6 +46,12 @@
       "Work hard, comrade. Your reward is coming. Just... not here."
     ]
   },
+  "muriel": {
+    "1": ["I can read, you know. Better than most here.", "Come by the barn any time. I'll read you the Commandments."],
+    "2": ["The fourth Commandment. 'No animal shall sleep in a bed WITH SHEETS.'", "I could have sworn those last two words weren't there before."],
+    "3": ["'No animal shall kill any other animal WITHOUT CAUSE.'", "Clover asked me to read it again. I did. Neither of us said anything after."],
+    "4": ["There's only one Commandment on the wall now.", "I read it to Clover. She just looked at the wall for a long time."]
+  },
   "dog": {
     "2": ["Grrr..."],
     "3": ["Grrr... grrr..."],
