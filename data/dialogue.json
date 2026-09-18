@@ -34,6 +34,18 @@
     "3": ["You have questions? Squealer speaks for me."],
     "4": ["Napoleon does not look up from his meal."]
   },
+  "moses": {
+    "1": [
+      "Have you heard of Sugarcandy Mountain, comrade? Up there, past the clouds.",
+      "It's Sunday seven days a week. Clover grows all year round. Lump sugar on the hedges!",
+      "The pigs call me a liar. But they cannot say I'm wrong."
+    ],
+    "4": [
+      "Ah, you're still here. So am I. Sugarcandy Mountain is still waiting.",
+      "Funny thing. The pigs don't chase me off anymore. They give me a gill of beer a day.",
+      "Work hard, comrade. Your reward is coming. Just... not here."
+    ]
+  },
   "dog": {
     "2": ["Grrr..."],
     "3": ["Grrr... grrr..."],
