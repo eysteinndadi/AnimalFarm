@@ -21,6 +21,8 @@ def build_registry(props, npcs):
             for tile in tiles or prop.solid_tiles:
                 registry[tile] = action
     for npc in npcs:
+        if npc.mobile:
+            continue  # checked by live position in Game._interact
         for tile in npc.solid_tiles:
             registry[tile] = {
                 "type": "dialogue",

@@ -1,3 +1,6 @@
+import math
+import random
+
 import pygame
 
 import assets
@@ -21,11 +24,12 @@ class Prop:
 
     def __init__(self, name, tx, ty, w=1, h=1, color=(120, 90, 60),
                  sprite_h=None, interact=None, sprite=None, frame=0,
-                 frame_w=None):
+                 frame_w=None, anchor="left"):
         self.name = name
         self.tx, self.ty = tx, ty
         self.w, self.h = w, h
         self.color = color
+        self.anchor = anchor  # "left": image's bottom-left on footprint; "center": centered over it
         self.sprite_h = sprite_h if sprite_h is not None else h * TILE_SIZE
         interact = interact or []
         self.interact = [interact] if isinstance(interact, dict) else interact
@@ -59,6 +63,8 @@ class Prop:
         x = round(self.tx * TILE_SIZE - offset.x)
         bottom = round((self.ty + self.h) * TILE_SIZE - offset.y)
         if self.image:
+            if self.anchor == "center":
+                x += (self.w * TILE_SIZE - self.image.get_width()) // 2
             surface.blit(self.image, (x, bottom - self.image.get_height()))
             return
         rect = pygame.Rect(x, bottom - self.sprite_h, self.w * TILE_SIZE, self.sprite_h)
@@ -71,19 +77,30 @@ class NPC:
 
     With `patrol=[a, b]` (two tiles on a straight horizontal or vertical
     line) the NPC walks back and forth between them, pausing at each end.
+    With `wander=[x0, y0, x1, y1]` it moves one tile at a time in random
+    directions, staying inside that tile rectangle (inclusive); `idle=(lo, hi)`
+    is the random pause between moves and `hop=True` adds a little jump arc.
+    With `fly=[x0, y0, x1, y1]` it flies in straight lines (not tile by tile)
+    to random free tiles inside that rectangle, perching for `idle` seconds
+    between flights. In the air it is neither solid nor talkable.
     `sprite_moving` is an optional second walk frame. Sprites are assumed
     to face left; set `faces_right` for art drawn the other way. Without
-    `patrol` it stays put.
+    `patrol` or `wander` it stays put.
     """
 
     SPRITE_HEIGHT = 24
     SPEED = 2.0        # tiles per second
     PAUSE = 1.0        # seconds waiting at each patrol endpoint
+    WANDER_PAUSE = (0.4, 2.0)  # random idle range between hops
+    HOP_HEIGHT = 4     # px the sprite lifts mid-hop when wandering
+    FLY_SPEED = 2.5    # tiles per second in flight (average)
+    FLY_HEIGHT = 14    # px altitude at the top of a flight arc
+    FLY_PAUSE = (2.0, 6.0)  # default perch time between flights
     FRAME_TIME = 0.15  # seconds per walk-animation frame
 
     def __init__(self, name, dialogue_id, tx, ty, color=(180, 180, 200),
-                 sprite=None, sprite_moving=None, patrol=None,
-                 faces_right=False, w=1):
+                 sprite=None, sprite_moving=None, patrol=None, wander=None,
+                 faces_right=False, w=1, idle=None, hop=False, fly=None):
         self.name = name
         self.dialogue_id = dialogue_id
         self.tx, self.ty = tx, ty
@@ -91,6 +108,15 @@ class NPC:
         self.pos = pygame.Vector2(tx * TILE_SIZE, ty * TILE_SIZE)
         self.color = color
         self.patrol = [tuple(p) for p in patrol] if patrol else None
+        self.wander = tuple(wander) if wander else None
+        self.fly = tuple(fly) if fly else None
+        default_idle = self.FLY_PAUSE if fly else self.WANDER_PAUSE
+        self.idle = tuple(idle) if idle else default_idle
+        self.hop = hop
+        self.mobile = any(x is not None for x in (self.patrol, self.wander, self.fly))
+        # Wanderers and flyers are small animals: the player can walk into
+        # their tile and they scatter (see `shoo`) instead of blocking the way.
+        self.passable = self.wander is not None or self.fly is not None
 
         self.sprite = assets.load_image(sprite) if sprite else None
         self.sprite_moving = (
@@ -112,13 +138,22 @@ class NPC:
         self._step_dir = (0, 0)
         self._prev_tile = (tx, ty)
         self._anim_t = 0.0
+        self.flying = False
+        self._fly_from = self.pos.copy()
+        self._fly_to = self.pos.copy()
+        self._fly_t = 0.0
+        self._fly_duration = 1.0
 
     @property
     def foot_y(self):
+        if self.flying:
+            return float("inf")  # airborne: draw over everything
         return self.pos.y + TILE_SIZE
 
     @property
     def occupied_tiles(self):
+        if self.flying:
+            return set()
         anchors = [(self.tx, self.ty)]
         if self.moving:
             anchors.append(self._prev_tile)
@@ -132,7 +167,10 @@ class NPC:
         self.facing_left = tile_x < self.tx
 
     def update(self, dt, blocked):
-        if self.patrol is None:
+        if not self.mobile:
+            return
+        if self.flying:
+            self._glide(dt)
             return
         if self.moving:
             self._advance(dt)
@@ -140,7 +178,42 @@ class NPC:
         if self._pause > 0:
             self._pause -= dt
             return
-        self._step_toward(blocked)
+        if self.patrol is not None:
+            self._step_toward(blocked)
+        elif self.fly is not None:
+            self._take_off(blocked)
+        else:
+            self._hop_randomly(blocked)
+
+    def _take_off(self, blocked, tries=20):
+        x0, y0, x1, y1 = self.fly
+        for _ in range(tries):
+            tx, ty = random.randint(x0, x1), random.randint(y0, y1)
+            if (tx, ty) != (self.tx, self.ty) and (tx, ty) not in blocked:
+                break
+        else:
+            self._pause = random.uniform(*self.idle)
+            return
+        self.facing_left = tx < self.tx
+        self.tx, self.ty = tx, ty
+        self._fly_from.update(self.pos)
+        self._fly_to.update(tx * TILE_SIZE, ty * TILE_SIZE)
+        dist = (self._fly_to - self._fly_from).length()
+        self._fly_duration = max(dist / (self.FLY_SPEED * TILE_SIZE), 0.6)
+        self._fly_t = 0.0
+        self._anim_t = 0.0
+        self.flying = True
+
+    def _glide(self, dt):
+        self._fly_t = min(self._fly_t + dt / self._fly_duration, 1.0)
+        self._anim_t += dt
+        # Smoothstep: gentle take-off and landing instead of a linear dart.
+        t = self._fly_t * self._fly_t * (3 - 2 * self._fly_t)
+        self.pos = self._fly_from.lerp(self._fly_to, t)
+        if self._fly_t >= 1.0:
+            self.pos.update(self._fly_to)
+            self.flying = False
+            self._pause = random.uniform(*self.idle)
 
     def _step_toward(self, blocked):
         # Pick the next patrol endpoint and take one step along the line.
@@ -151,14 +224,45 @@ class NPC:
             self._target = 1 - self._target
             self._pause = self.PAUSE
             return
+        self._step((dx, dy), blocked)
+
+    def _hop_randomly(self, blocked, away_from=None):
+        x0, y0, x1, y1 = self.wander
+        options = [
+            (dx, dy) for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1))
+            if x0 <= self.tx + dx <= x1 and y0 <= self.ty + dy <= y1
+        ]
+        random.shuffle(options)
+        if away_from is not None:
+            fx, fy = away_from
+            options.sort(key=lambda d: -abs(self.tx + d[0] - fx) - abs(self.ty + d[1] - fy))
+        for d in options:
+            if self._step(d, blocked):
+                break
+        self._pause = random.uniform(*self.idle)
+
+    def shoo(self, blocked, from_tile):
+        """Move away right now (wanderers hop, flyers take off), preferring
+        tiles farther from `from_tile`. Called when the player steps into
+        this NPC."""
+        if self.moving or self.flying:
+            return
+        if self.fly is not None:
+            self._take_off(blocked)
+        elif self.wander is not None:
+            self._hop_randomly(blocked, away_from=from_tile)
+
+    def _step(self, direction, blocked):
+        dx, dy = direction
         nx, ny = self.tx + dx, self.ty + dy
-        if (nx, ny) in blocked:
-            return  # wait and retry next frame
+        if any((nx + i, ny) in blocked for i in range(self.w)):
+            return False  # wait and retry next frame
         self._prev_tile = (self.tx, self.ty)
         self.tx, self.ty = nx, ny
         self._step_dir = (dx, dy)
         self.facing_left = dx < 0 or (dx == 0 and self.facing_left)
         self.moving = True
+        return True
 
     def _advance(self, dt):
         step = self.SPEED * TILE_SIZE * dt
@@ -170,11 +274,21 @@ class NPC:
             self.pos.update(target)
             self.moving = False
 
+    def _hop_offset(self):
+        if self.flying:
+            return round(self.FLY_HEIGHT * math.sin(math.pi * self._fly_t))
+        # Hopping wanderers arc upward over the step; others walk flat.
+        if not self.hop or not self.moving:
+            return 0
+        target = pygame.Vector2(self.tx * TILE_SIZE, self.ty * TILE_SIZE)
+        progress = 1 - (target - self.pos).length() / TILE_SIZE
+        return round(self.HOP_HEIGHT * math.sin(math.pi * progress))
+
     def _current_frame(self):
         if not self._frames:
             return None
         pair = self._frames[0]
-        if self.moving and len(self._frames) > 1:
+        if (self.moving or self.flying) and len(self._frames) > 1:
             pair = self._frames[int(self._anim_t / self.FRAME_TIME) % 2]
         return pair[0 if self.facing_left else 1]
 
@@ -187,7 +301,7 @@ class NPC:
             surface.blit(
                 sprite,
                 (x + (self.w * TILE_SIZE - sprite.get_width()) // 2,
-                 bottom - sprite.get_height()),
+                 bottom - sprite.get_height() - self._hop_offset()),
             )
             return
         body = pygame.Rect(x, bottom - self.SPRITE_HEIGHT, TILE_SIZE, self.SPRITE_HEIGHT)

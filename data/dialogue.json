@@ -35,16 +35,8 @@
     "4": ["Napoleon does not look up from his meal."]
   },
   "moses": {
-    "1": [
-      "Have you heard of Sugarcandy Mountain, comrade? Up there, past the clouds.",
-      "It's Sunday seven days a week. Clover grows all year round. Lump sugar on the hedges!",
-      "The pigs call me a liar. But they cannot say I'm wrong."
-    ],
-    "4": [
-      "Ah, you're still here. So am I. Sugarcandy Mountain is still waiting.",
-      "Funny thing. The pigs don't chase me off anymore. They give me a gill of beer a day.",
-      "Work hard, comrade. Your reward is coming. Just... not here."
-    ]
+    "1": ["Have you heard of Sugarcandy Mountain, comrade? Up there, past the clouds.", "It's Sunday seven days a week. Clover grows all year round. Lump sugar on the hedges!", "The pigs call me a liar. But they cannot say I'm wrong."],
+    "4": ["Ah, you're still here. So am I. Sugarcandy Mountain is still waiting.", "Funny thing. The pigs don't chase me off anymore. They give me a gill of beer a day.", "Work hard, comrade. Your reward is coming. Just... not here."]
   },
   "muriel": {
     "1": ["I can read, you know. Better than most here.", "Come by the barn any time. I'll read you the Commandments."],
@@ -57,8 +49,8 @@
     "3": ["Grrr... grrr..."],
     "4": ["The dog watches you silently."]
   },
-  "puppy":{
-    "2":["Woof!"]
+  "puppy": {
+    "2": ["Woof!"]
   },
   "pig": {
     "4": ["Why are you staring? Get back to work, comrade."]
@@ -68,5 +60,11 @@
     "2": ["Napoleon wants our eggs for trade with the men. Over my dead body."],
     "3": ["They cut our rations until we surrendered the eggs. Nine of us died for it."],
     "4": ["The hen clucks quietly and pecks at the ground."]
+  },
+  "cow": {
+    "1": ["Moo. Nobody milked us this morning, so the pigs did. The milk went... somewhere."],
+    "2": ["Moo. The milk goes into the pigs' mash now. Squealer says they need it for their brains."],
+    "3": ["Moo. Milked twice a day. We never see a drop of it."],
+    "4": ["The cow chews slowly and does not look up."]
   }
 }

@@ -1,6 +1,14 @@
 import pygame
 
+import assets
+
 TILE_SIZE = 16
+
+# Benjamin's frames: 0-8 mouth closed, 9-17 mouth open. Within each set,
+# frame 0 is standing and 1-8 are the walk cycle. All face left.
+BENJAMIN_FRAMES = "assets/characters/Benjamin/pixil-frame-{}.png"
+FRAMES_PER_SET = 9
+WALK_PX_PER_FRAME = 4  # advance one walk frame every 4px travelled
 
 
 def ease_out(t):
@@ -8,11 +16,6 @@ def ease_out(t):
 
 
 class Player:
-    COLOR = (220, 60, 60)
-    FACING_COLOR = (255, 220, 120)
-    SPRITE_WIDTH = 16
-    SPRITE_HEIGHT = 24               # taller than the tile: pokes out the top
-    OVERHANG = SPRITE_HEIGHT - TILE_SIZE
     SPEED = 6.5        # tiles per second at full walk speed
     TURN_TIME = 0.1    # seconds a new direction must be held before stepping
 
@@ -24,6 +27,20 @@ class Player:
         self.tile_y = tile_y
         self.pos = pygame.Vector2(tile_x * TILE_SIZE, tile_y * TILE_SIZE)
         self.facing = "down"
+        # The art is side-view only, so up/down keep the last horizontal facing.
+        self.facing_left = True
+        self.can_interact = False  # set by Game; shows the mouth-open frames
+        self._walk_px = 0.0
+        self._last_pos = self.pos.copy()
+
+        # frames[mouth_open][index] -> (left-facing, right-facing)
+        self._frames = []
+        for start in (0, FRAMES_PER_SET):
+            frame_set = []
+            for i in range(start, start + FRAMES_PER_SET):
+                img = assets.load_image(BENJAMIN_FRAMES.format(i))
+                frame_set.append((img, pygame.transform.flip(img, True, False)))
+            self._frames.append(frame_set)
 
         self.moving = False
         self.step_t = 0.0
@@ -51,7 +68,13 @@ class Player:
             "right": (pygame.K_RIGHT, pygame.K_d),
         }
 
+    def _set_facing(self, direction):
+        self.facing = direction
+        if direction in ("left", "right"):
+            self.facing_left = direction == "left"
+
     def update(self, dt, keys):
+        self._last_pos.update(self.pos)
         if self.turn_timer > 0:
             self.turn_timer -= dt
             if not self._is_held(keys, self.turn_dir):
@@ -64,6 +87,7 @@ class Player:
             self._advance(dt, keys)
         elif self.turn_timer <= 0:
             self._idle_input(keys)
+        self._walk_px += (self.pos - self._last_pos).length()
 
     def _is_held(self, keys, direction):
         return direction is not None and any(
@@ -89,12 +113,12 @@ class Player:
         else:
             # Face the new direction first; stepping starts if the key
             # is still held when the turn timer expires.
-            self.facing = d
+            self._set_facing(d)
             self.turn_dir = d
             self.turn_timer = self.TURN_TIME
 
     def _begin_step(self, direction):
-        self.facing = direction
+        self._set_facing(direction)
         dx, dy = self._directions[direction]
         nx, ny = self.tile_x + dx, self.tile_y + dy
         if (
@@ -148,31 +172,25 @@ class Player:
         self.stopping = False
         self.turn_timer = 0.0
         self.facing = "down"
+        self._last_pos.update(self.pos)
 
     @property
     def foot_y(self):
         # Bottom edge of the tile the player stands on; used for y-sorting.
         return self.pos.y + TILE_SIZE
 
-    def draw(self, surface, offset):
-        # The sprite is anchored at the bottom of its tile, so it
-        # overhangs into the tile above (the "tall sprite" look).
-        rect = pygame.Rect(
-            round(self.pos.x - offset.x),
-            round(self.pos.y - offset.y) - self.OVERHANG,
-            self.SPRITE_WIDTH,
-            self.SPRITE_HEIGHT,
-        )
-        pygame.draw.rect(surface, self.COLOR, rect)
+    def _current_frame(self):
+        frame_set = self._frames[1 if self.can_interact else 0]
+        index = 0
+        if self.moving:
+            index = 1 + int(self._walk_px / WALK_PX_PER_FRAME) % (FRAMES_PER_SET - 1)
+        pair = frame_set[index]
+        return pair[0] if self.facing_left else pair[1]
 
-        # Small marker on the edge the player is facing.
-        marker = pygame.Rect(0, 0, 4, 4)
-        if self.facing == "down":
-            marker.center = (rect.centerx, rect.centery-self.SPRITE_HEIGHT/8)
-        elif self.facing == "up":
-            marker.midtop = rect.midtop
-        elif self.facing == "left":
-            marker.midleft = (rect.left, rect.centery-self.SPRITE_HEIGHT/4)
-        else:
-            marker.midright = (rect.right, rect.centery-self.SPRITE_HEIGHT/4)
-        pygame.draw.rect(surface, self.FACING_COLOR, marker)
+    def draw(self, surface, offset):
+        # Anchored bottom-center on the tile, like NPCs: the sprite is
+        # wider and taller than 16px and overhangs above and to the sides.
+        sprite = self._current_frame()
+        x = round(self.pos.x - offset.x) + (TILE_SIZE - sprite.get_width()) // 2
+        y = round(self.pos.y - offset.y) + TILE_SIZE - sprite.get_height()
+        surface.blit(sprite, (x, y))

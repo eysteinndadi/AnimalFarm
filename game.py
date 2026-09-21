@@ -67,6 +67,7 @@ class Game:
                 sprite=p.get("sprite"),
                 frame=p.get("frame", 0),
                 frame_w=p.get("frame_w"),
+                anchor=p.get("anchor", "left"),
             )
             for p in cfg["props"]
         ]
@@ -77,6 +78,10 @@ class Game:
                 sprite=n.get("sprite"),
                 sprite_moving=n.get("sprite_moving"),
                 patrol=n.get("patrol"),
+                wander=n.get("wander"),
+                idle=n.get("idle"),
+                hop=n.get("hop", False),
+                fly=n.get("fly"),
                 faces_right=n.get("faces_right", False),
                 w=n.get("w", 1),
             )
@@ -85,13 +90,13 @@ class Game:
         self.commandments = cfg.get("commandments", [])
         self.ending_lines = cfg.get("ending", [])
 
-        # Static solidity never changes; patrolling NPCs block via their
+        # Static solidity never changes; mobile NPCs block via their
         # occupied tiles, recomputed each frame in update().
         self.static_solid = set(self.map.solid)
         for entity in self.props:
             self.static_solid |= entity.solid_tiles
         for npc in self.npcs:
-            if npc.patrol is None:
+            if not npc.mobile:
                 self.static_solid |= npc.solid_tiles
         self.player.solid = set(self.static_solid)
         self.player.teleport(*cfg["spawn"])
@@ -138,10 +143,10 @@ class Game:
 
     def _interact(self):
         front = self.player.tile_in_front()
-        # Patrolling NPCs aren't in the registry (they move); check them
+        # Mobile NPCs aren't in the registry (they move); check them
         # by position before the static lookup.
         for npc in self.npcs:
-            if npc.patrol is not None and front in npc.occupied_tiles:
+            if npc.mobile and front in npc.occupied_tiles:
                 npc.face_toward(self.player.tile_x)
                 lines = self.dialogues.get(npc.dialogue_id, {}).get(
                     str(self.phase), ["..."]
@@ -184,29 +189,40 @@ class Game:
     def update(self):
         if self.state != "explore":
             return
-        patrolling = [npc for npc in self.npcs if npc.patrol is not None]
+        patrolling = [npc for npc in self.npcs if npc.mobile]
         player_tile = (self.player.tile_x, self.player.tile_y)
         for i, npc in enumerate(patrolling):
             blocked = set(self.static_solid) | {player_tile}
             for j, other in enumerate(patrolling):
                 if i != j:
                     blocked |= other.occupied_tiles
+            if npc.passable and player_tile in npc.occupied_tiles:
+                npc.shoo(blocked, player_tile)
             npc.update(self.dt, blocked)
         self.player.solid = set(self.static_solid)
         for npc in patrolling:
-            self.player.solid |= npc.occupied_tiles
+            if not npc.passable:
+                self.player.solid |= npc.occupied_tiles
         keys = pygame.key.get_pressed()
         self.player.update(self.dt, keys)
+        self.player.can_interact = self._has_interaction()
         self.camera.update(self._camera_target())
+
+    def _has_interaction(self):
+        front = self.player.tile_in_front()
+        return front in self.registry or any(
+            npc.mobile and front in npc.occupied_tiles for npc in self.npcs
+        )
 
     def render(self):
         self.map.draw_ground(self.screen, self.camera.offset)
 
         # Y-sorted pass: tall things draw back-to-front by their foot y.
-        drawables = [(self.player.foot_y, self.player.draw)]
+        # On equal foot y (standing side by side) the player wins the tie.
+        drawables = [(self.player.foot_y, 1, self.player.draw)]
         for entity in (*self.props, *self.npcs):
-            drawables.append((entity.foot_y, entity.draw))
-        for _, draw in sorted(drawables, key=lambda item: item[0]):
+            drawables.append((entity.foot_y, 0, entity.draw))
+        for _, _, draw in sorted(drawables, key=lambda item: item[:2]):
             draw(self.screen, self.camera.offset)
 
         scaled = pygame.transform.scale(
