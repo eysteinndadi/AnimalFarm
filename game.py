@@ -26,6 +26,8 @@ INTERACT_KEYS = (pygame.K_e, pygame.K_SPACE)
 
 
 class Game:
+    CREDITS_SPEED = 20  # logical px per second the credits roll
+
     def __init__(self):
         pygame.init()
         pygame.display.set_caption("AnimalFarm")
@@ -39,6 +41,8 @@ class Game:
         self.map = TileMap("data/farm_map_v2.json")
         self.phases = assets.load_json("data/phases.json")
         self.dialogues = assets.load_json("data/dialogue.json")
+        self.credits = assets.load_json("data/credits.json")
+        self.credits_scroll = 0.0
         self.camera = Camera(
             LOGICAL_WIDTH, LOGICAL_HEIGHT,
             self.map.pixel_width, self.map.pixel_height,
@@ -187,6 +191,12 @@ class Game:
         self.state = "transition"
 
     def update(self):
+        if self.state == "end":
+            # Roll the credits up until the last line rests mid-screen.
+            end = ui.credits_height(self.credits, SCALE) + WINDOW_HEIGHT / 2
+            self.credits_scroll = min(
+                self.credits_scroll + self.CREDITS_SPEED * SCALE * self.dt, end
+            )
         if self.state != "explore":
             return
         patrolling = [npc for npc in self.npcs if npc.mobile]
@@ -242,7 +252,7 @@ class Game:
         elif self.state == "transition":
             ui.draw_transition(self.window, self.transition_text, SCALE)
         elif self.state == "end":
-            ui.draw_transition(self.window, "The End", SCALE)
+            ui.draw_credits(self.window, self.credits, self.credits_scroll, SCALE)
 
         pygame.display.flip()
 

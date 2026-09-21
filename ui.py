@@ -66,6 +66,41 @@ def draw_transition(surface, text, scale=1):
     surface.blit(img, ((w - img.get_width()) / 2, (h - img.get_height()) / 2))
 
 
+def credits_height(lines, scale=1):
+    """Total pixel height of the credits roll (see draw_credits)."""
+    return sum(_credit_line_height(line, scale) for line in lines)
+
+
+def _credit_line_height(line, scale):
+    if line.startswith("#"):
+        return 20 * scale
+    return 12 * scale
+
+
+def draw_credits(surface, lines, scroll, scale=1):
+    """Film-style rolling credits on black.
+
+    `lines` come from data/credits.json: "# Heading" draws a bigger gold
+    heading, "" leaves a gap, anything else is a normal centered line.
+    `scroll` is how many pixels the roll has moved up; at 0 the first
+    line is just below the bottom edge.
+    """
+    s = scale
+    surface.fill((0, 0, 0))
+    w, h = surface.get_size()
+    heading_font, body_font = _font(16 * s), _font(10 * s)
+    y = h - scroll
+    for line in lines:
+        line_h = _credit_line_height(line, s)
+        if line and -line_h < y < h:
+            if line.startswith("#"):
+                img = heading_font.render(line.lstrip("# "), True, (255, 220, 120))
+            else:
+                img = body_font.render(line, True, (240, 240, 240))
+            surface.blit(img, ((w - img.get_width()) / 2, y))
+        y += line_h
+
+
 def draw_scene_panel(surface, title, lines, scale=1):
     """Full-screen close-up panel: barn wall, farmhouse window, etc."""
     s = scale
