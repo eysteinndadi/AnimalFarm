@@ -14,7 +14,7 @@ def build_registry(props, npcs):
     for prop in props:
         for spec in prop.interact:
             action = {"type": spec["event"]}
-            for key in ("id", "text"):
+            for key in ("id", "text", "allegory"):
                 if key in spec:
                     action[key] = spec[key]
             tiles = {tuple(t) for t in spec.get("tiles", [])}

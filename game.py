@@ -26,7 +26,8 @@ INTERACT_KEYS = (pygame.K_e, pygame.K_SPACE)
 
 
 class Game:
-    CREDITS_SPEED = 20  # logical px per second the credits roll
+    CREDITS_SPEED = 20       # logical px per second the credits roll
+    ALLEGORY_SLIDE_TIME = 0.25
 
     def __init__(self):
         pygame.init()
@@ -43,6 +44,12 @@ class Game:
         self.dialogues = assets.load_json("data/dialogue.json")
         self.credits = assets.load_json("data/credits.json")
         self.credits_scroll = 0.0
+        self.allegory = assets.load_json("data/allegory.json")
+        self.allegory_key = None
+        self.allegory_open = False
+        self.allegory_t = 0.0        # 0 = closed, 1 = fully slid in
+        self.allegory_scroll = 0
+        self.allegory_overflow = 0
         self.camera = Camera(
             LOGICAL_WIDTH, LOGICAL_HEIGHT,
             self.map.pixel_width, self.map.pixel_height,
@@ -119,7 +126,43 @@ class Game:
             elif event.type == pygame.KEYDOWN:
                 self._on_key(event.key)
 
+    def _set_allegory(self, key):
+        self.allegory_key = key if key in self.allegory else None
+        self.allegory_open = False
+        self.allegory_t = 0.0
+        self.allegory_scroll = 0
+
+    def _allegory_content(self):
+        entry = self.allegory.get(self.allegory_key)
+        if entry is None:
+            return None
+        text = entry["text"]
+        if isinstance(text, dict):
+            phases = sorted(int(p) for p in text)
+            pick = max((p for p in phases if p <= self.phase),
+                       default=phases[0])
+            text = text[str(pick)]
+        return entry["title"], text
+
     def _on_key(self, key):
+        # While the allegory panel is open it swallows input: Q or Esc
+        # closes it, Up/Down scrolls, E must not advance the dialogue.
+        if self.allegory_open:
+            if key in (pygame.K_q, pygame.K_ESCAPE):
+                self.allegory_open = False
+            elif key in (pygame.K_UP, pygame.K_w):
+                self.allegory_scroll = max(
+                    0, self.allegory_scroll - 24 * SCALE)
+            elif key in (pygame.K_DOWN, pygame.K_s):
+                self.allegory_scroll = min(
+                    self.allegory_overflow,
+                    self.allegory_scroll + 24 * SCALE)
+            return
+        if key == pygame.K_q:
+            if self.state in ("dialogue", "scene") and self.allegory_key:
+                self.allegory_open = True
+                self.allegory_scroll = 0
+            return
         if key in INTERACT_KEYS:
             if self.state == "explore":
                 self._interact()
@@ -128,6 +171,7 @@ class Game:
                 if self.dialogue.done:
                     self.dialogue = None
                     self.state = "explore"
+                    self._set_allegory(None)
             elif self.state == "scene":
                 self._close_scene()
             elif self.state == "transition":
@@ -139,11 +183,13 @@ class Game:
                 self._close_scene()
             elif self.state in ("dialogue", "transition"):
                 self.state = "explore"
+                self._set_allegory(None)
 
     def _close_scene(self):
         self.scene = None
         self.state = self.after_scene or "explore"
         self.after_scene = None
+        self._set_allegory(None)
 
     def _interact(self):
         front = self.player.tile_in_front()
@@ -157,6 +203,7 @@ class Game:
                 )
                 self.dialogue = DialogueSession(npc.name, lines)
                 self.state = "dialogue"
+                self._set_allegory(npc.dialogue_id)
                 return
         action = self.registry.get(front)
         if action is None:
@@ -168,16 +215,20 @@ class Game:
             )
             self.dialogue = DialogueSession(action["speaker"], lines)
             self.state = "dialogue"
+            self._set_allegory(action["id"])
         elif kind == "message":
             self.dialogue = DialogueSession("", [action["text"]])
             self.state = "dialogue"
+            self._set_allegory(action.get("allegory"))
         elif kind == "commandments":
             self.scene = ("The Seven Commandments", self.commandments)
             self.state = "scene"
+            self._set_allegory("commandments")
         elif kind == "ending":
             self.scene = ("The Farmhouse Window", self.ending_lines)
             self.after_scene = "end"
             self.state = "scene"
+            self._set_allegory("farmhouse")
         elif kind == "advance_phase":
             self._advance_phase()
 
@@ -191,6 +242,12 @@ class Game:
         self.state = "transition"
 
     def update(self):
+        target = 1.0 if self.allegory_open else 0.0
+        step = self.dt / self.ALLEGORY_SLIDE_TIME
+        if self.allegory_t < target:
+            self.allegory_t = min(target, self.allegory_t + step)
+        elif self.allegory_t > target:
+            self.allegory_t = max(target, self.allegory_t - step)
         if self.state == "end":
             # Roll the credits up until the last line rests mid-screen.
             end = ui.credits_height(self.credits, SCALE) + WINDOW_HEIGHT / 2
@@ -242,17 +299,27 @@ class Game:
 
         # UI draws at window resolution so text stays crisp
         # instead of being upscaled with the world.
+        hint = "[Q] Soviet allegory" if self.allegory_key else None
         if self.state == "dialogue" and self.dialogue:
             ui.draw_dialogue_box(
                 self.window, self.dialogue.speaker,
-                self.dialogue.current_line, SCALE,
+                self.dialogue.current_line, SCALE, hint=hint,
             )
         elif self.state == "scene" and self.scene:
-            ui.draw_scene_panel(self.window, *self.scene, scale=SCALE)
+            ui.draw_scene_panel(self.window, *self.scene, scale=SCALE,
+                                hint=hint)
         elif self.state == "transition":
             ui.draw_transition(self.window, self.transition_text, SCALE)
         elif self.state == "end":
             ui.draw_credits(self.window, self.credits, self.credits_scroll, SCALE)
+
+        if self.allegory_t > 0:
+            content = self._allegory_content()
+            if content:
+                self.allegory_overflow = ui.draw_allegory_panel(
+                    self.window, *content, self.allegory_t,
+                    self.allegory_scroll, SCALE,
+                )
 
         pygame.display.flip()
 

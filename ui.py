@@ -1,5 +1,14 @@
 import pygame
 
+# Fraction of the window width the allegory side panel covers.
+PANEL_FRACTION = 0.4
+# Allegory panel palette: yellowed old paper with dark ink.
+PAPER = (222, 202, 150)
+PAPER_EDGE = (120, 90, 50)
+INK_TITLE = (110, 40, 30)
+INK = (55, 40, 28)
+INK_FAINT = (125, 105, 75)
+
 _fonts = {}
 
 
@@ -24,7 +33,7 @@ def wrap_text(text, font, max_width):
     return lines or [""]
 
 
-def draw_dialogue_box(surface, speaker, text, scale=1):
+def draw_dialogue_box(surface, speaker, text, scale=1, hint=None):
     """Pokemon-style bottom dialogue box.
 
     Drawn at window resolution (scale = window/logical) so text is crisp
@@ -56,6 +65,11 @@ def draw_dialogue_box(surface, speaker, text, scale=1):
         font.render("[E]", True, (200, 200, 200)),
         (rect.right - 12 * s, rect.bottom - 11 * s),
     )
+    if hint:
+        surface.blit(
+            font.render(hint, True, (180, 180, 200)),
+            (rect.x + 6 * s, rect.bottom - 11 * s),
+        )
 
 
 def draw_transition(surface, text, scale=1):
@@ -101,7 +115,7 @@ def draw_credits(surface, lines, scroll, scale=1):
         y += line_h
 
 
-def draw_scene_panel(surface, title, lines, scale=1):
+def draw_scene_panel(surface, title, lines, scale=1, hint=None):
     """Full-screen close-up panel: barn wall, farmhouse window, etc."""
     s = scale
     w, h = surface.get_size()
@@ -123,7 +137,62 @@ def draw_scene_panel(surface, title, lines, scale=1):
             y += 11 * s
         y += 4 * s
 
-    hint = body_font.render("[E] close", True, (180, 170, 150))
+    footer = "[E] close" + ("   " + hint if hint else "")
+    img = body_font.render(footer, True, (180, 170, 150))
     surface.blit(
-        hint, (panel.centerx - hint.get_width() / 2, panel.bottom - 13 * s)
+        img, (panel.centerx - img.get_width() / 2, panel.bottom - 13 * s)
     )
+
+
+def draw_allegory_panel(surface, title, text, t, scroll, scale=1):
+    """Soviet-allegory side panel sliding in from the right edge.
+
+    `t` is 0..1 slide progress (eased here), `scroll` the body scroll
+    offset in px. Returns the overflow in px (max useful scroll).
+    """
+    s = scale
+    w, h = surface.get_size()
+    panel_w = round(w * PANEL_FRACTION)
+    e = 1 - (1 - t) ** 2
+    panel = pygame.Rect(round(w - panel_w * e), 0, panel_w, h)
+    # Old-paper look: parchment fill, a darker worn edge, and ink text.
+    pygame.draw.rect(surface, PAPER, panel)
+    pygame.draw.rect(surface, PAPER_EDGE, (panel.x, 0, max(1, round(3 * s)), h))
+
+    title_font = _font(11 * s)
+    body_font = _font(8 * s)
+    text_w = panel_w - 12 * s
+
+    y = panel.y + 8 * s
+    for line in wrap_text(title, title_font, text_w):
+        surface.blit(
+            title_font.render(line, True, INK_TITLE),
+            (panel.x + 6 * s, y),
+        )
+        y += 12 * s
+    pygame.draw.line(
+        surface, PAPER_EDGE,
+        (panel.x + 6 * s, y + 2 * s), (panel.right - 6 * s, y + 2 * s), max(1, round(s)),
+    )
+
+    body_y = y + 6 * s
+    body_top = body_y
+    body_bottom = panel.bottom - 13 * s
+    lines = wrap_text(text, body_font, text_w)
+    prev_clip = surface.get_clip()
+    surface.set_clip((panel.x, body_top, panel.width, body_bottom - body_top))
+    for line in lines:
+        surface.blit(
+            body_font.render(line, True, INK),
+            (panel.x + 6 * s, body_y - scroll),
+        )
+        body_y += 9 * s
+    surface.set_clip(prev_clip)
+
+    overflow = max(0, (body_y - body_top) - (body_bottom - body_top))
+    footer = "[Q] close" + ("  Up/Down: scroll" if overflow > 0 else "")
+    surface.blit(
+        body_font.render(footer, True, INK_FAINT),
+        (panel.x + 6 * s, panel.bottom - 13 * s),
+    )
+    return overflow

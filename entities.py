@@ -275,14 +275,16 @@ class NPC:
             self.moving = False
 
     def _hop_offset(self):
+        # Returned unrounded: the caller rounds once on the final screen y,
+        # since rounding position and lift separately makes them jitter.
         if self.flying:
-            return round(self.FLY_HEIGHT * math.sin(math.pi * self._fly_t))
+            return self.FLY_HEIGHT * math.sin(math.pi * self._fly_t)
         # Hopping wanderers arc upward over the step; others walk flat.
         if not self.hop or not self.moving:
-            return 0
+            return 0.0
         target = pygame.Vector2(self.tx * TILE_SIZE, self.ty * TILE_SIZE)
         progress = 1 - (target - self.pos).length() / TILE_SIZE
-        return round(self.HOP_HEIGHT * math.sin(math.pi * progress))
+        return self.HOP_HEIGHT * math.sin(math.pi * progress)
 
     def _current_frame(self):
         if not self._frames:
@@ -298,10 +300,11 @@ class NPC:
         sprite = self._current_frame()
         if sprite:
             # Anchored bottom-center of the footprint, like everything else.
+            sprite_bottom = round(self.pos.y + TILE_SIZE - offset.y - self._hop_offset())
             surface.blit(
                 sprite,
                 (x + (self.w * TILE_SIZE - sprite.get_width()) // 2,
-                 bottom - sprite.get_height() - self._hop_offset()),
+                 sprite_bottom - sprite.get_height()),
             )
             return
         body = pygame.Rect(x, bottom - self.SPRITE_HEIGHT, TILE_SIZE, self.SPRITE_HEIGHT)
