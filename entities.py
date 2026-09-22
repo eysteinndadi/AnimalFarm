@@ -20,11 +20,18 @@ class Prop:
     bottom-left corner sits on the footprint's bottom-left tile; the
     image may be any size and overhang the footprint. `frame_w` slices
     a horizontal sprite sheet and `frame` picks which slice to show.
+    `shadow` (px) draws a soft dark strip on the ground along the
+    image's bottom edge so a building looks grounded. It follows the
+    opaque stretches of the bottom row (skipping doorways and gaps);
+    `shadow_under` instead spans the whole width and tucks 1px up under
+    the sprite, for buildings on stilts.
     """
+
+    SHADOW_ALPHA = 120
 
     def __init__(self, name, tx, ty, w=1, h=1, color=(120, 90, 60),
                  sprite_h=None, interact=None, sprite=None, frame=0,
-                 frame_w=None, anchor="left"):
+                 frame_w=None, anchor="left", shadow=0, shadow_under=False):
         self.name = name
         self.tx, self.ty = tx, ty
         self.w, self.h = w, h
@@ -39,6 +46,29 @@ class Prop:
             sheet = assets.load_image(sprite)
             fw = frame_w or sheet.get_width()
             self.image = sheet.subsurface((frame * fw, 0, fw, sheet.get_height()))
+        self.shadow = None
+        if shadow and self.image:
+            # Shadow only the opaque stretches of the image's bottom row, so
+            # it hugs the walls and skips transparent margins and doorways.
+            bottom_row, iw = self.image.get_height() - 1, self.image.get_width()
+            self.shadow = pygame.Surface((iw, shadow), pygame.SRCALPHA)
+            runs, start = [], None
+            for x in range(iw + 1):
+                opaque = x < iw and self.image.get_at((x, bottom_row)).a > 0
+                if opaque and start is None:
+                    start = x
+                elif not opaque and start is not None:
+                    runs.append((start, x - 1))
+                    start = None
+            if shadow_under and runs:
+                runs = [(runs[0][0], runs[-1][1])]
+            self.shadow_dy = -1 if shadow_under else 0
+            for x0, x1 in runs:
+                for row in range(shadow):
+                    # Fade out and pull the ends in as the shadow gets further from the wall.
+                    a = round(self.SHADOW_ALPHA * (1 - row / shadow))
+                    if x0 + row <= x1 - row:
+                        pygame.draw.line(self.shadow, (0, 0, 0, a), (x0 + row, row), (x1 - row, row))
 
     @property
     def foot_y(self):
@@ -65,6 +95,8 @@ class Prop:
         if self.image:
             if self.anchor == "center":
                 x += (self.w * TILE_SIZE - self.image.get_width()) // 2
+            if self.shadow:
+                surface.blit(self.shadow, (x, bottom + self.shadow_dy))
             surface.blit(self.image, (x, bottom - self.image.get_height()))
             return
         rect = pygame.Rect(x, bottom - self.sprite_h, self.w * TILE_SIZE, self.sprite_h)
@@ -96,6 +128,7 @@ class NPC:
     FLY_SPEED = 2.5    # tiles per second in flight (average)
     FLY_HEIGHT = 14    # px altitude at the top of a flight arc
     FLY_PAUSE = (2.0, 6.0)  # default perch time between flights
+    SHOO_RANGE = 5     # max tiles a startled flyer relocates, so it's easy to catch up
     FRAME_TIME = 0.15  # seconds per walk-animation frame
 
     def __init__(self, name, dialogue_id, tx, ty, color=(180, 180, 200),
@@ -185,12 +218,21 @@ class NPC:
         else:
             self._hop_randomly(blocked)
 
-    def _take_off(self, blocked, tries=20):
+    def _take_off(self, blocked, tries=20, max_dist=None, away_from=None):
         x0, y0, x1, y1 = self.fly
+        if max_dist is not None:
+            # Only look at nearby tiles (a short startled hop, not a full flight).
+            x0, x1 = max(x0, self.tx - max_dist), min(x1, self.tx + max_dist)
+            y0, y1 = max(y0, self.ty - max_dist), min(y1, self.ty + max_dist)
         for _ in range(tries):
             tx, ty = random.randint(x0, x1), random.randint(y0, y1)
-            if (tx, ty) != (self.tx, self.ty) and (tx, ty) not in blocked:
-                break
+            if (tx, ty) == (self.tx, self.ty) or (tx, ty) in blocked:
+                continue
+            if max_dist is not None and math.hypot(tx - self.tx, ty - self.ty) > max_dist:
+                continue
+            if away_from is not None and max(abs(tx - away_from[0]), abs(ty - away_from[1])) < 2:
+                continue  # don't land right next to whoever startled us
+            break
         else:
             self._pause = random.uniform(*self.idle)
             return
@@ -248,7 +290,7 @@ class NPC:
         if self.moving or self.flying:
             return
         if self.fly is not None:
-            self._take_off(blocked)
+            self._take_off(blocked, max_dist=self.SHOO_RANGE, away_from=from_tile)
         elif self.wander is not None:
             self._hop_randomly(blocked, away_from=from_tile)
 

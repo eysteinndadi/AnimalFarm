@@ -79,6 +79,8 @@ class Game:
                 frame=p.get("frame", 0),
                 frame_w=p.get("frame_w"),
                 anchor=p.get("anchor", "left"),
+                shadow=p.get("shadow", 0),
+                shadow_under=p.get("shadow_under", False),
             )
             for p in cfg["props"]
         ]

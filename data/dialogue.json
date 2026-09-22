@@ -1,6 +1,6 @@
 {
   "sheep": {
-    "1": ["We're finally free! No more whips, no more Mr. Jones!"],
+    "1": ["Four legs good, two legs baaaad!"],
     "2": ["Four legs good, two legs bad! Four legs good, two legs bad!"],
     "3": ["Four legs good, two legs... better? Is that right? I can't remember anymore."],
     "4": ["The sheep stares at you in silence."]
@@ -27,6 +27,9 @@
     "2": ["The windmill was Napoleon's idea all along. Snowball stole the plans!"],
     "3": ["The windmill was destroyed by Snowball's agents in the night. Traitors, all of them!"],
     "4": ["All animals are equal. Some are simply more equal than others."]
+  },
+  "snowball": {
+    "1": ["Comrade! Have you seen my plans for the windmill? Electricity in every stall, a three-day week!", "Napoleon says it is nonsense. But think of it - light in the barn, warmth in winter, and time to learn to read.", "Come to the Sunday meeting. We vote on it next week. Every animal gets a say."]
   },
   "napoleon": {
     "1": ["The revolution has only begun, comrade."],
