@@ -17,7 +17,7 @@
       {"name": "barn", "at": [5, 30], "w": 10, "h": 5, "sprite": "assets/buildings/barn.png", "shadow": 4, "interact": {"event": "commandments"}},
       {"name": "stables", "at": [48, 30], "w": 8, "h": 3, "sprite": "assets/buildings/stables.png", "shadow": 4, "interact": {"event": "message", "text": "Boxer's stall, neatly kept."}},
       {"name": "flagpole", "at": [29, 30], "w": 1, "h": 1, "sprite": "assets/props/flag.png", "frame_w": 24, "frame": 0, "interact": {"event": "advance_phase", "text": "The animals have gathered to witness the hoisting of their new flag.", "allegory": "flag"}},
-      {"name": "farmhouse", "at": [24, 41], "w": 10, "h": 6, "sprite": "assets/buildings/farmhouse.png", "shadow": 4, "interact": {"event": "message", "text": "The farmhouse stands dark and empty. The animals have decided that it should be a museum.", "allegory": "farmhouse"}},
+      {"name": "farmhouse", "at": [24, 41], "w": 10, "h": 6, "sprite": "assets/buildings/farmhouse.png", "shadow": 4, "interact": {"event": "message", "text": "The farmhouse stands dark and empty. The animals have decided that it should be a museum now.", "allegory": "farmhouse"}},
       {"name": "henhouse", "at": [49, 18], "w": 3, "h": 2, "sprite": "assets/buildings/henhouse.png", "anchor": "center", "shadow": 3, "shadow_under": true, "interact": {"event": "message", "text": "The henhouse. The hens are happy, their eggs their own.", "allegory": "hen"}},
       {"name": "tree", "at": [14, 27], "w": 1, "h": 1, "sprite": "assets/props/tree1.png", "anchor": "center"},
       {"name": "tree", "at": [3, 40], "w": 1, "h": 1, "sprite": "assets/props/tree1.png", "anchor": "center"},

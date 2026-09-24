@@ -1,17 +1,17 @@
 {
   "sheep": {
-    "1": ["Four legs good, two legs baaaad!"],
+    "1": ["Four legs good, two legs baaaaad!"],
     "2": ["Four legs good, two legs bad! Four legs good, two legs bad!"],
     "3": ["Four legs good, two legs... better? Is that right? I can't remember anymore."],
     "4": ["The sheep stares at you in silence."]
   },
   "boxer": {
-    "1": ["The hay harvest will be twice as good now that we work for ourselves!"],
-    "2": ["I will work harder. The windmill will be built, you'll see."],
+    "1": ["The hay harvest this year will be the largest ever! I will work harder!"],
+    "2": ["I will work harder. The windmill will be built."],
     "3": ["My hoof hurts... but Napoleon is always right. I will work harder."]
   },
   "clover": {
-    "1": ["Comrade, isn't it wonderful? The farm is ours at last."],
+    "1": ["Mr. Jones sold my four foals, I am happy he's gone."],
     "2": ["Something about the dogs worries me. And where did Snowball go?"],
     "3": ["Boxer looks so tired. I told him to rest, but he won't listen."],
     "4": ["When I look at the pigs now... I can no longer tell them apart from the men."]
@@ -23,7 +23,7 @@
     "4": ["Nothing ever changes. Donkeys live a long time."]
   },
   "squealer": {
-    "1": ["Comrades! Rejoice! Jones is gone forever!"],
+    "1": ["Milk and apples are!"],
     "2": ["The windmill was Napoleon's idea all along. Snowball stole the plans!"],
     "3": ["The windmill was destroyed by Snowball's agents in the night. Traitors, all of them!"],
     "4": ["All animals are equal. Some are simply more equal than others."]
@@ -38,7 +38,7 @@
     "4": ["Napoleon does not look up from his meal."]
   },
   "moses": {
-    "1": ["Have you heard of Sugarcandy Mountain, comrade? Up there, past the clouds.", "It's Sunday seven days a week. Clover grows all year round. Lump sugar on the hedges!"],
+    "1": ["Have you heard of Sugarcandy Mountain, comrade? Up there, past the clouds.", "It's Sunday seven days a week. Clover grows all year round and lump sugar and linseed cake grows on the hedges!"],
     "4": ["Ah, you're still here. So am I. Sugarcandy Mountain is still waiting.", "Funny thing. The pigs don't chase me off anymore. They give me a gill of beer a day.", "Work hard, comrade. Your reward is coming. Just... not here."]
   },
   "muriel": {
