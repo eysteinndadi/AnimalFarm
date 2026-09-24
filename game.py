@@ -23,6 +23,8 @@ WINDOW_HEIGHT = LOGICAL_HEIGHT * SCALE
 FPS = 60
 
 INTERACT_KEYS = (pygame.K_e, pygame.K_SPACE)
+CONFIRM_OPTIONS = ("Yes", "Not yet")
+DEFAULT_PHASE_QUESTION = "Go to the next phase?"
 
 
 class Game:
@@ -33,7 +35,11 @@ class Game:
         pygame.init()
         pygame.display.set_caption("AnimalFarm")
 
-        self.window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+        # SCALED lets pygame stretch the fixed-size window to the display
+        # (letterboxed) so fullscreen needs no changes to the rendering.
+        self.window = pygame.display.set_mode(
+            (WINDOW_WIDTH, WINDOW_HEIGHT), pygame.SCALED
+        )
         self.screen = pygame.Surface((LOGICAL_WIDTH, LOGICAL_HEIGHT))
         self.clock = pygame.time.Clock()
         self.running = True
@@ -61,6 +67,9 @@ class Game:
         self.dialogue = None
         self.scene = None          # (title, lines) for close-up panels
         self.after_scene = None    # state to enter when the scene closes
+        self.after_dialogue = None # "confirm" to ask about advancing after a message
+        self.confirm_question = DEFAULT_PHASE_QUESTION
+        self.confirm_choice = 0
         self.transition_text = ""
         self.load_phase(1)
 
@@ -81,6 +90,7 @@ class Game:
                 anchor=p.get("anchor", "left"),
                 shadow=p.get("shadow", 0),
                 shadow_under=p.get("shadow_under", False),
+                spin=p.get("spin"),
             )
             for p in cfg["props"]
         ]
@@ -147,6 +157,9 @@ class Game:
         return entry["title"], text
 
     def _on_key(self, key):
+        if key in (pygame.K_f, pygame.K_F11):
+            pygame.display.toggle_fullscreen()
+            return
         # While the allegory panel is open it swallows input: Q or Esc
         # closes it, Up/Down scrolls, E must not advance the dialogue.
         if self.allegory_open:
@@ -172,19 +185,34 @@ class Game:
                 self.dialogue.advance()
                 if self.dialogue.done:
                     self.dialogue = None
-                    self.state = "explore"
                     self._set_allegory(None)
+                    if self.after_dialogue == "confirm":
+                        self.after_dialogue = None
+                        self._open_confirm()
+                    else:
+                        self.state = "explore"
+            elif self.state == "confirm":
+                if self.confirm_choice == 0:
+                    self._advance_phase()
+                else:
+                    self.state = "explore"
             elif self.state == "scene":
                 self._close_scene()
             elif self.state == "transition":
                 self.state = "explore"
+        elif self.state == "confirm" and key in (
+            pygame.K_LEFT, pygame.K_RIGHT, pygame.K_a, pygame.K_d,
+            pygame.K_UP, pygame.K_DOWN, pygame.K_w, pygame.K_s,
+        ):
+            self.confirm_choice = 1 - self.confirm_choice
         elif key == pygame.K_ESCAPE:
             if self.state in ("explore", "end"):
                 self.running = False
             elif self.state == "scene":
                 self._close_scene()
-            elif self.state in ("dialogue", "transition"):
+            elif self.state in ("dialogue", "transition", "confirm"):
                 self.state = "explore"
+                self.after_dialogue = None
                 self._set_allegory(None)
 
     def _close_scene(self):
@@ -232,7 +260,20 @@ class Game:
             self.state = "scene"
             self._set_allegory("farmhouse")
         elif kind == "advance_phase":
-            self._advance_phase()
+            self.confirm_question = action.get("question", DEFAULT_PHASE_QUESTION)
+            text = action.get("text")
+            if text:
+                lines = text if isinstance(text, list) else [text]
+                self.dialogue = DialogueSession("", lines)
+                self.state = "dialogue"
+                self.after_dialogue = "confirm"
+                self._set_allegory(action.get("allegory"))
+            else:
+                self._open_confirm()
+
+    def _open_confirm(self):
+        self.confirm_choice = 0
+        self.state = "confirm"
 
     def _advance_phase(self):
         next_phase = self.phase + 1
@@ -244,6 +285,8 @@ class Game:
         self.state = "transition"
 
     def update(self):
+        for prop in self.props:
+            prop.update(self.dt)
         target = 1.0 if self.allegory_open else 0.0
         step = self.dt / self.ALLEGORY_SLIDE_TIME
         if self.allegory_t < target:
@@ -310,6 +353,11 @@ class Game:
         elif self.state == "scene" and self.scene:
             ui.draw_scene_panel(self.window, *self.scene, scale=SCALE,
                                 hint=hint)
+        elif self.state == "confirm":
+            ui.draw_confirm_box(
+                self.window, self.confirm_question, CONFIRM_OPTIONS,
+                self.confirm_choice, SCALE,
+            )
         elif self.state == "transition":
             ui.draw_transition(self.window, self.transition_text, SCALE)
         elif self.state == "end":

@@ -4,10 +4,14 @@ import assets
 
 TILE_SIZE = 16
 
-# Benjamin's frames: 0-8 mouth closed, 9-17 mouth open. Within each set,
-# frame 0 is standing and 1-8 are the walk cycle. All face left.
-BENJAMIN_FRAMES = "assets/characters/Benjamin/pixil-frame-{}.png"
+# Benjamin's sheet: 54 frames of 30x27 in one row, three views of 18 -
+# side (0-17), looking down (18-35), looking up (36-53). Within each view,
+# 0-8 are mouth closed and 9-17 mouth open; frame 0 of each set is standing
+# and 1-8 are the walk cycle. The body always faces left in the art.
+BENJAMIN_SHEET = "assets/characters/Benjamin/Benjamin_sprite_sheet.png"
+FRAME_W, FRAME_H = 30, 27
 FRAMES_PER_SET = 9
+VIEWS = ("side", "down", "up")
 WALK_PX_PER_FRAME = 4  # advance one walk frame every 4px travelled
 
 
@@ -33,14 +37,19 @@ class Player:
         self._walk_px = 0.0
         self._last_pos = self.pos.copy()
 
-        # frames[mouth_open][index] -> (left-facing, right-facing)
-        self._frames = []
-        for start in (0, FRAMES_PER_SET):
-            frame_set = []
-            for i in range(start, start + FRAMES_PER_SET):
-                img = assets.load_image(BENJAMIN_FRAMES.format(i))
-                frame_set.append((img, pygame.transform.flip(img, True, False)))
-            self._frames.append(frame_set)
+        # frames[view][mouth_open][index] -> (left-facing, right-facing)
+        sheet = assets.load_image(BENJAMIN_SHEET)
+        self._frames = {}
+        for v, view in enumerate(VIEWS):
+            sets = []
+            for mouth in range(2):
+                frame_set = []
+                for i in range(FRAMES_PER_SET):
+                    n = (v * 2 + mouth) * FRAMES_PER_SET + i
+                    img = sheet.subsurface((n * FRAME_W, 0, FRAME_W, FRAME_H))
+                    frame_set.append((img, pygame.transform.flip(img, True, False)))
+                sets.append(frame_set)
+            self._frames[view] = sets
 
         self.moving = False
         self.step_t = 0.0
@@ -180,7 +189,8 @@ class Player:
         return self.pos.y + TILE_SIZE
 
     def _current_frame(self):
-        frame_set = self._frames[1 if self.can_interact else 0]
+        view = self.facing if self.facing in ("up", "down") else "side"
+        frame_set = self._frames[view][1 if self.can_interact else 0]
         index = 0
         if self.moving:
             index = 1 + int(self._walk_px / WALK_PX_PER_FRAME) % (FRAMES_PER_SET - 1)

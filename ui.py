@@ -72,6 +72,34 @@ def draw_dialogue_box(surface, speaker, text, scale=1, hint=None):
         )
 
 
+def draw_confirm_box(surface, question, options, choice, scale=1):
+    """Dialogue-style box with a question and a row of choices; the
+    selected one is highlighted with a cursor."""
+    s = scale
+    margin, box_h = 4 * s, 56 * s
+    w, h = surface.get_size()
+    rect = pygame.Rect(margin, h - box_h - margin, w - 2 * margin, box_h)
+    pygame.draw.rect(surface, (16, 16, 28), rect)
+    pygame.draw.rect(surface, (230, 230, 240), rect, max(1, round(1 * s)))
+
+    font = _font(10 * s)
+    y = rect.y + 5 * s
+    for line in wrap_text(question, font, rect.width - 12 * s):
+        surface.blit(font.render(line, True, (240, 240, 240)), (rect.x + 6 * s, y))
+        y += 10 * s
+
+    x = rect.x + 14 * s
+    y = rect.bottom - 14 * s
+    for i, label in enumerate(options):
+        selected = i == choice
+        color = (255, 220, 120) if selected else (170, 170, 185)
+        if selected:
+            surface.blit(font.render(">", True, color), (x - 8 * s, y))
+        text = font.render(label, True, color)
+        surface.blit(text, (x, y))
+        x += text.get_width() + 24 * s
+
+
 def draw_transition(surface, text, scale=1):
     surface.fill((0, 0, 0))
     font = _font(14 * scale)

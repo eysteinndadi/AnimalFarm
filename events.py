@@ -3,7 +3,8 @@
 Action types:
   dialogue      - {"type": "dialogue", "id": <id>, "speaker": <name>}
   commandments  - {"type": "commandments"}
-  advance_phase - {"type": "advance_phase"}
+  advance_phase - {"type": "advance_phase", "text": ..., "question": ...}
+                  (text and question optional; asks before moving on)
   ending        - {"type": "ending"}
   message       - {"type": "message", "text": "..."}
 """
@@ -14,7 +15,7 @@ def build_registry(props, npcs):
     for prop in props:
         for spec in prop.interact:
             action = {"type": spec["event"]}
-            for key in ("id", "text", "allegory"):
+            for key in ("id", "text", "allegory", "question"):
                 if key in spec:
                     action[key] = spec[key]
             tiles = {tuple(t) for t in spec.get("tiles", [])}
