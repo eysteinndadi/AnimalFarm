@@ -3,19 +3,22 @@
     "title": "Napoleon = Joseph Stalin",
     "text": {
       "1": "Napoleon stands for Joseph Stalin. Right now the pigs share power after the Rebellion (the Russian Revolution of 1917), just as Stalin was one of several Bolshevik leaders after Lenin. Notice that he says little and works behind the scenes: Stalin built his power through control of the Party machinery, not through speeches.",
-      "2": "Napoleon has driven Snowball off the farm with his dogs, as Stalin expelled Leon Trotsky from the Party in 1927 and exiled him from the USSR in 1929. The Sunday meetings are cancelled. Like the Soviet Union, the farm is now ruled by one leader and his committee of pigs, and open debate is over.",
+      "2": "Napoleon and Snowball now oppose each other at every meeting, as Stalin and Trotsky fought over who would succeed Lenin after his death in 1924. Napoleon does not win the arguments - Snowball is the better speaker - but he has taken the puppies away and is training them in secret, just as Stalin quietly built his control of the Party machinery and the secret police. When the dogs are grown he will use them to drive Snowball off the farm, as Stalin expelled Trotsky from the Party in 1927 and exiled him from the USSR in 1929.",
       "4": "Napoleon now walks on two legs, wears clothes and drinks with the human farmers. Orwell is pointing at the Tehran Conference of 1943, where Stalin sat down with Churchill and Roosevelt as an equal. The leader of the revolution has become indistinguishable from the tyrants it overthrew."
     }
   },
   "snowball": {
     "title": "Snowball = Leon Trotsky",
-    "text": "Snowball is the clever, idealistic pig who plans the windmill, organises committees and leads the animals at the Battle of the Cowshed. He stands for Leon Trotsky, who built the Red Army and led it through the Civil War, and who argued for spreading revolution and industrialising quickly. Like Trotsky, Snowball loses the power struggle to a rival who prefers quiet control to public debate. Once he is driven off the farm, every setback is blamed on him - just as Trotsky, exiled in 1929, became the scapegoat for all of the USSR's failures and was murdered on Stalin's orders in Mexico in 1940."
+    "text": {
+      "1": "Snowball is the clever, idealistic pig who plans the windmill, organises committees and leads the animals at the Battle of the Cowshed. He stands for Leon Trotsky, who built the Red Army and led it through the Civil War, and who argued for spreading revolution and industrialising quickly. Like Trotsky, Snowball loses the power struggle to a rival who prefers quiet control to public debate. Once he is driven off the farm, every setback is blamed on him - just as Trotsky, exiled in 1929, became the scapegoat for all of the USSR's failures and was murdered on Stalin's orders in Mexico in 1940.",
+      "2": "Snowball is at the height of his influence: he has drawn up the windmill, he wins every debate at the meetings, and the animals are about to vote his way. Trotsky too was the better speaker and the more brilliant thinker - but Stalin controlled the Party machinery, and that mattered more. Snowball does not know that Napoleon's dogs are almost grown. He is about to be chased off the farm for good, as Trotsky was expelled from the Party in 1927 and exiled in 1929. From then on every failure will be blamed on him, until he is murdered on Stalin's orders in Mexico in 1940."
+    }
   },
   "squealer": {
     "title": "Squealer = Soviet propaganda",
     "text": {
       "1": "Squealer represents the Soviet propaganda machine, above all the Party newspaper Pravda ('Truth'). He is the pigs' explainer: whenever something looks unfair, he turns it into something that sounds reasonable. Listen for 'Surely you don't want Jones back?' - fear of the old regime keeps everyone obedient.",
-      "2": "Squealer now rewrites history. Snowball, who fought bravely at the Battle of the Cowshed, is turned into a traitor. In the USSR, Trotsky was cut out of photographs and blamed for every failure. Squealer also reads out figures proving production is up, echoing the Five-Year Plan reports that always announced success.",
+      "2": "Squealer argues Napoleon's side of the windmill debate and has figures ready to prove it. This was the role of the Party press, above all Pravda, in the struggle between Stalin and Trotsky in the 1920s: the newspapers were run by Stalin's allies, so Trotsky's arguments reached fewer people and were made to sound reckless. Notice how Squealer brings up Jones again - fear of the old regime is the quickest way to shut a debate down.",
       "3": "After the confessions and executions, Squealer's job is to make terror feel normal. He explains that the Commandments never said what the animals remember. Orwell had followed the Moscow show trials (1936-38), where prisoners confessed to impossible crimes; propaganda then made those confessions the official truth.",
       "4": "Squealer produces lists of figures proving life has never been better, while the animals are hungrier than ever. This is Orwell's picture of a state where language itself has been captured: when the record can be rewritten at will, there is no way left to argue."
     }
@@ -24,7 +27,7 @@
     "title": "Boxer = the loyal working class",
     "text": {
       "1": "Boxer stands for the Russian proletariat - the workers and peasants the revolution was supposedly for. He is strong, honest and totally devoted, with the motto 'I will work harder!'. He also cannot learn the alphabet past D: Orwell is showing how a lack of education left the workers unable to question their leaders.",
-      "2": "Boxer hauls the stone for the windmill, which stands for Stalin's Five-Year Plans of rapid industrialisation. Soviet workers made huge sacrifices for these projects, urged on by 'hero worker' campaigns such as the Stakhanovite movement. Boxer's new motto, 'Napoleon is always right', shows loyalty to the cause becoming loyalty to one man.",
+      "2": "Boxer throws himself into building the farm up, out before dawn and back after dark. Orwell is showing the genuine enthusiasm of Soviet workers in the years after the revolution, when many believed they were building a new world with their own hands. Their energy and loyalty were real - and that is exactly what the leadership would later turn against them. Listen to how Boxer answers every problem: 'I will work harder!'",
       "3": "Boxer is troubled by the executions but cannot make himself think it through, and decides the answer must be to work harder. Orwell saw this as the tragedy of the working class: their loyalty was genuine, and it was used against them.",
       "4": "Boxer is gone. When his lungs gave out, the pigs sold him to the knacker for a case of whisky, while Squealer told everyone he died peacefully in hospital. This is the fate of the workers who built the Soviet state: used up and discarded, their sacrifices turned into someone else's comfort."
     }
@@ -106,7 +109,7 @@
   "windmill": {
     "title": "The windmill = Soviet industrialisation",
     "text": {
-      "2": "The windmill was Snowball's idea, promising electricity and a three-day week. Napoleon opposed it, then adopted it once Snowball was gone - just as Stalin attacked Trotsky's plans for rapid industrialisation and then carried them out as his own Five-Year Plans from 1928.",
+      "2": "The windmill is Snowball's idea, promising electricity and a three-day week. Napoleon opposes it now - and once Snowball is gone he will adopt it as his own, just as Stalin attacked Trotsky's plans for rapid industrialisation and then carried them out as his own Five-Year Plans from 1928.",
       "3": "The windmill lies in ruins. In the book the first is toppled by a storm, which Napoleon blames on Snowball, and the second is blown up by Frederick's men at the Battle of the Windmill - Orwell's picture of Germany's invasion of the USSR in 1941 after Hitler broke his pact with Stalin.",
       "4": "The windmill is finished at last, but it grinds corn for sale instead of lighting the stalls as promised. Soviet industrialisation succeeded on paper while ordinary lives got no easier."
     }
@@ -115,6 +118,7 @@
     "title": "The farmhouse = the Kremlin",
     "text": {
       "1": "The animals agree to keep Jones's house as a museum: no animal shall ever live there. In 1917 the Bolsheviks took over the tsar's palaces and the Kremlin in the same spirit - as property of the people.",
+      "2": "Nobody lives in the farmhouse yet, but the pigs have begun holding their meetings inside, where Napoleon and Snowball argue over the windmill. The Bolshevik leadership met in the Kremlin in the same way, and the struggle between Stalin and Trotsky was fought out in its committee rooms rather than in front of the people. The museum is quietly becoming a seat of government.",
       "3": "The pigs have moved in and sleep in the beds. The Commandment now reads 'No animal shall sleep in a bed with sheets'. The Kremlin became the home of the new rulers, cut off from the people they governed.",
       "4": "Through the window you will see pigs and men drinking together, then quarrelling over cards. Orwell wrote this scene about the Tehran Conference of 1943 and predicted, correctly, that the alliance between Stalin and the West would not last."
     }

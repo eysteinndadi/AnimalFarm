@@ -1,3 +1,5 @@
+import math
+
 import pygame
 
 import assets
@@ -56,7 +58,7 @@ class Player:
         self.step_duration = 1.0 / self.SPEED
         self.step_start = self.pos.copy()
         self.step_target = self.pos.copy()
-        self.move_dir = "down"
+        self.move_vec = (0, 1)
         self.stopping = False      # last step eases out
         self.stop_from = self.pos.copy()
         self.stop_t0 = 0.0
@@ -70,6 +72,7 @@ class Player:
             "left": (-1, 0),
             "right": (1, 0),
         }
+        self._names = {v: k for k, v in self._directions.items()}
         self._keymap = {
             "down": (pygame.K_DOWN, pygame.K_s),
             "up": (pygame.K_UP, pygame.K_w),
@@ -103,22 +106,20 @@ class Player:
             keys[k] for k in self._keymap[direction]
         )
 
-    def _held_direction(self, keys, prefer=None):
-        order = list(self._directions)
-        if prefer in self._directions:
-            order.remove(prefer)
-            order.insert(0, prefer)
-        for d in order:
-            if self._is_held(keys, d):
-                return d
-        return None
+    def _held_vector(self, keys):
+        # Sum of all held directions: two keys at once give a diagonal,
+        # opposite keys cancel. None when nothing (useful) is held.
+        dx = self._is_held(keys, "right") - self._is_held(keys, "left")
+        dy = self._is_held(keys, "down") - self._is_held(keys, "up")
+        return (dx, dy) if (dx or dy) else None
 
     def _idle_input(self, keys):
-        d = self._held_direction(keys)
-        if d is None:
+        vec = self._held_vector(keys)
+        if vec is None:
             return
-        if d == self.facing:
-            self._begin_step(d)
+        d = self._names.get(vec)
+        if d is None or d == self.facing:
+            self._begin_step(vec)
         else:
             # Face the new direction first; stepping starts if the key
             # is still held when the turn timer expires.
@@ -126,27 +127,61 @@ class Player:
             self.turn_dir = d
             self.turn_timer = self.TURN_TIME
 
+    def _free(self, tx, ty):
+        return (
+            0 <= tx < self.map_width and 0 <= ty < self.map_height
+            and (tx, ty) not in self.solid
+        )
+
     def _begin_step(self, direction):
-        self._set_facing(direction)
-        dx, dy = self._directions[direction]
+        dx, dy = self._directions.get(direction, direction)
+        if dx and dy:
+            # Diagonal: the target and both tiles beside the path must be
+            # free so we never squeeze through a corner. If it is blocked,
+            # slide along whichever component is open (current heading first).
+            if not (self._free(self.tile_x + dx, self.tile_y + dy)
+                    and self._free(self.tile_x + dx, self.tile_y)
+                    and self._free(self.tile_x, self.tile_y + dy)):
+                options = [(dx, 0), (0, dy)]
+                if self.move_vec == (0, dy) or self.facing in ("up", "down"):
+                    options.reverse()
+                for opt in options:
+                    if self._free(self.tile_x + opt[0], self.tile_y + opt[1]):
+                        self._begin_step(opt)
+                        return
+                self.moving = False
+                return
+            # Keep the current facing if it is part of the diagonal,
+            # otherwise face the horizontal component; the body always
+            # turns to match it so the side/up/down art reads correctly.
+            horiz = self._names[(dx, 0)]
+            if self.facing not in (horiz, self._names[(0, dy)]):
+                self.facing = horiz
+            self.facing_left = dx < 0
+        else:
+            self._set_facing(self._names[(dx, dy)])
         nx, ny = self.tile_x + dx, self.tile_y + dy
-        if (
-            not (0 <= nx < self.map_width and 0 <= ny < self.map_height)
-            or (nx, ny) in self.solid
-        ):
+        if not self._free(nx, ny):
             self.moving = False
             return
         self.tile_x, self.tile_y = nx, ny
-        self.move_dir = direction
+        self.move_vec = (dx, dy)
         self.step_start.update((nx - dx) * TILE_SIZE, (ny - dy) * TILE_SIZE)
         self.step_target.update(nx * TILE_SIZE, ny * TILE_SIZE)
+        self.step_duration = math.hypot(dx, dy) / self.SPEED
         self.step_t = 0.0
         self.stopping = False
         self.moving = True
 
+    def _still_heading(self, keys):
+        held = self._held_vector(keys)
+        return held is not None and (
+            held[0] * self.move_vec[0] + held[1] * self.move_vec[1] > 0
+        )
+
     def _advance(self, dt, keys):
-        # Releasing the movement key mid-step eases into the target tile.
-        if not self.stopping and not self._is_held(keys, self.move_dir):
+        # Releasing the movement keys mid-step eases into the target tile.
+        if not self.stopping and not self._still_heading(keys):
             self.stopping = True
             self.stop_from.update(self.pos)
             self.stop_t0 = self.step_t
@@ -164,11 +199,11 @@ class Player:
 
         if self.step_t >= 1.0:
             self.pos.update(self.step_target)
-            d = self._held_direction(keys, prefer=self.move_dir)
-            if d is None:
+            vec = self._held_vector(keys)
+            if vec is None:
                 self.moving = False
             else:
-                self._begin_step(d)
+                self._begin_step(vec)
 
     def tile_in_front(self):
         dx, dy = self._directions[self.facing]

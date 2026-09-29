@@ -107,6 +107,7 @@ class Game:
                 fly=n.get("fly"),
                 faces_right=n.get("faces_right", False),
                 w=n.get("w", 1),
+                look=n.get("look", "left"),
             )
             for n in cfg["npcs"]
         ]

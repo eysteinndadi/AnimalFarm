@@ -162,7 +162,8 @@ class NPC:
 
     def __init__(self, name, dialogue_id, tx, ty, color=(180, 180, 200),
                  sprite=None, sprite_moving=None, patrol=None, wander=None,
-                 faces_right=False, w=1, idle=None, hop=False, fly=None):
+                 faces_right=False, w=1, idle=None, hop=False, fly=None,
+                 look="left"):
         self.name = name
         self.dialogue_id = dialogue_id
         self.tx, self.ty = tx, ty
@@ -193,7 +194,7 @@ class NPC:
             flipped = pygame.transform.flip(img, True, False)
             self._frames.append((flipped, img) if faces_right else (img, flipped))
 
-        self.facing_left = True
+        self.facing_left = look != "right"
         self.moving = False
         self._pause = 0.0
         self._target = 0 if patrol and tuple(patrol[0]) != (tx, ty) else 1

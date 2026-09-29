@@ -1,18 +1,18 @@
 {
   "sheep": {
-    "1": ["Four legs good, two legs baaaaad!"],
+    "1": ["Four legs good, two legs baaaaaaad!"],
     "2": ["Four legs good, two legs bad! Four legs good, two legs bad!"],
     "3": ["Four legs good, two legs... better? Is that right? I can't remember anymore."],
     "4": ["The sheep stares at you in silence."]
   },
   "boxer": {
     "1": ["The hay harvest this year will be the largest ever! I will work harder!"],
-    "2": ["I will work harder. The windmill will be built."],
+    "2": ["The harvest is in, and the farm has never looked better. I will work harder!"],
     "3": ["My hoof hurts... but Napoleon is always right. I will work harder."]
   },
   "clover": {
     "1": ["Mr. Jones sold my four foals, I am happy he's gone."],
-    "2": ["Something about the dogs worries me. And where did Snowball go?"],
+    "2": ["Something about the dogs worries me. Napoleon keeps those puppies shut away, and he and Snowball never agree on anything anymore."],
     "3": ["Boxer looks so tired. I told him to rest, but he won't listen."],
     "4": ["When I look at the pigs now... I can no longer tell them apart from the men."]
   },
@@ -23,17 +23,18 @@
     "4": ["Nothing ever changes. Donkeys live a long time."]
   },
   "squealer": {
-    "1": ["Milk and apples are!"],
-    "2": ["The windmill was Napoleon's idea all along. Snowball stole the plans!"],
+    "1": ["Milk and apples are vital for a pig's health!", "Surely you don't wan't Mr. Jones to come back"],
+    "2": ["Comrade Napoleon has grave doubts about this windmill. Food production comes first!", "Surely you don't want Snowball's daydreams to bring Mr. Jones back?"],
     "3": ["The windmill was destroyed by Snowball's agents in the night. Traitors, all of them!"],
     "4": ["All animals are equal. Some are simply more equal than others."]
   },
   "snowball": {
-    "1": ["Comrade! Have you seen my plans for the windmill? Electricity in every stall, a three-day week!", "Napoleon says it is nonsense. But think of it - light in the barn, warmth in winter, and time to learn to read."]
+    "1": ["Comrade! Have you seen my plans for the windmill? We will have a three day week!", "There will be light in the barn, warmth in winter, and time to learn to read."],
+    "2": ["Have you seen my plans, comrade? Napoleon calls them nonsense, but on Sunday the animals will vote, and they will vote for the windmill.", "Vote for Snowball and the three-day week! Though... have you noticed Napoleon slips away from every meeting? Always off somewhere with those puppies of his."]
   },
   "napoleon": {
     "1": ["The revolution has only begun, comrade."],
-    "2": ["The farm needs order. My dogs will keep us safe."],
+    "2": ["Snowball's windmill is nonsense. It would take a year to build, and in the meantime we would all starve.", "Vote for Napoleon and the full manger, comrade."],
     "3": ["You have questions? Squealer speaks for me."],
     "4": ["Napoleon does not look up from his meal."]
   },
@@ -59,7 +60,7 @@
     "4": ["Why are you staring? Get back to work, comrade."]
   },
   "hen": {
-    "1": ["Cluck! No more eggs carted off to market. We keep our own now!"],
+    "1": ["Cluck! No more eggs carted off to market."],
     "2": ["Napoleon wants our eggs for trade with the men. Over my dead body."],
     "3": ["They cut our rations until we surrendered the eggs. Nine of us died for it."],
     "4": ["The hen clucks quietly and pecks at the ground."]
