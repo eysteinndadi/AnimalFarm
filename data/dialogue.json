@@ -34,49 +34,49 @@
   },
   "snowball": {
     "1": ["What committee should you be in... the Whiter Wool movement? No maybe the Egg Production committee, Clean Tails League or Wild comrades Re-education committe? I will need to think about this... "],
-    "2": ["Have you seen my plans comrade? Soon the animals will vote and they need to vote for the windmill.", "Vote for Snowball and the three-day week!"]
+    "2": ["Have you seen my plans comrade? Soon the animals will vote and they need to vote for the windmill.", "Vote for Snowball and the three-day work week!"]
   },
   "napoleon": {
     "1": ["The revolution has only begun comrade."],
-    "2": ["Snowball's windmill is nonsense. It would take a year to build, and in the meantime we would all starve.", "Vote for Napoleon and the full manger, comrade."],
-    "3": ["The farm needs order. My dogs will keep us safe.", "The windmill will be built. Bring stone."],
-    "4": ["You have questions? Squealer speaks for me."],
-    "5": ["Napoleon looks down at you from his hind legs, a whip curled in his trotter.", "'Get back to work.'"]
+    "2": ["Snowball's windmill is nonsense. It would take a year to build and in the meantime we would all starve.", "Vote for Napoleon and the full manger!"],
+    "3": ["The farm needs order. My dogs will keep us safe. I think now is the time to build the windmill."],
+    "4": ["You have questions? Squealer will tell you."],
+    "5": ["Get back to work."]
   },
   "moses": {
-    "1": ["Have you heard of Sugarcandy Mountain, comrade? Up there, past the clouds.", "It's Sunday seven days a week. Clover grows all year round and lump sugar and linseed cake grows on the hedges!"],
-    "5": ["Ah, you're still here. So am I. Sugarcandy Mountain is still waiting.", "Funny thing. The pigs don't chase me off anymore. They give me a gill of beer a day.", "Work hard, comrade. Your reward is coming. Just... not here."]
+    "1": ["Have you heard of Sugarcandy Mountain, comrade? Up there, past the clouds.", "It's Sunday seven days a week and sugar grows on the hedge!"],
+    "5": ["Ah, good to see you again. Sugarcandy Mountain is still waiting.", "The pigs don't chase me off anymore they actually give me a gill of beer a day.", "Work hard comrade, your reward is coming. Just... not here but up in the clouds..."]
   },
   "muriel": {
-    "1": ["I can read, you know. Better than most here.", "Come by the barn any time. I'll read you the Commandments."],
-    "2": ["I read the Commandments to the animals every Sunday, after the meeting.", "Snowball says every animal should learn to read them for themselves. Napoleon says the sheep are proof that it can't be done."],
-    "3": ["The fourth Commandment. 'No animal shall sleep in a bed WITH SHEETS.'", "I could have sworn those last two words weren't there before."],
-    "4": ["'No animal shall kill any other animal WITHOUT CAUSE.'", "Clover asked me to read it again. I did. Neither of us said anything after."],
-    "5": ["There's only one Commandment on the wall now.", "I read it to Clover. She just looked at the wall for a long time."]
+    "1": ["I can read you know, better than most here.", "Come by the barn sometime and I'll read you the Commandments."],
+    "2": ["I read the Commandments to the animals every Sunday, after the meeting."],
+    "3": ["The fourth Commandment. 'No animal shall sleep in a bed with sheets.'", "I could have sworn those last two words weren't there before."],
+    "4": ["'No animal shall kill any other animal without cause.'", "I dont remeber the last two words but Squealer tells me otherwise."],
+    "5": ["There's only one Commandment on the wall now.", "All animals are equal but some are more equal than others."]
   },
   "dog": {
     "3": ["Grrr..."],
     "4": ["Grrr... grrr..."],
-    "5": ["The dog watches you silently."]
+    "5": ["Grrr..."]
   },
   "puppy": {
     "2": ["Woof!"]
   },
   "pig": {
-    "5": ["Why are you staring? Get back to work, comrade."]
+    "5": ["Why are you staring? Get back to work comrade."]
   },
   "hen": {
-    "1": ["Cluck! No more eggs carted off to the market."],
-    "2": ["Cluck! Ten of us now, and every egg our own.", "Snowball says the windmill will give us an electric heater in the henhouse. Napoleon says we should lay more and dream less."],
+    "1": ["No more eggs carted off to the market."],
+    "2": ["Ten of us now, and every egg our own.", "Snowball says the windmill will give us an electric heater in the henhouse. Napoleon says we should lay more and dream less."],
     "3": ["They're carting our eggs off to market again, just like under Jones.", "We smash every egg we can. Napoleon has cut our rations for it."],
     "4": ["They cut our rations until we surrendered the eggs. Nine of us died for it."],
-    "5": ["The hen clucks quietly and pecks at the ground."]
+    "5": ["Why are there so few of us?"]
   },
   "cow": {
-    "1": ["Moo. Nobody milked us this morning, so the pigs did. They took the milk because their job is so difficult"],
+    "1": ["Moo. Noone had milked us this morning so the pigs took it upon them."],
     "2": ["Moo. The milk goes into the pigs' mash now. Squealer says they need it for their brains."],
-    "3": ["Moo. The pigs take all the milk now, and the windfall apples too. Squealer explained why. I didn't follow."],
+    "3": ["Moo. The pigs take all the milk now and all the apples too."],
     "4": ["Moo. Milked twice a day. We never see a drop of it."],
-    "5": ["The cow chews slowly and does not look up."]
+    "5": ["Moooooooooooooooooo."]
   }
 }
