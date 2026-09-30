@@ -1,45 +1,23 @@
 {
   "napoleon": {
     "title": "Napoleon = Joseph Stalin",
-    "text": {
-      "1": "Napoleon stands for Joseph Stalin. Right now the pigs share power after the Rebellion (the Russian Revolution of 1917), just as Stalin was one of several Bolshevik leaders after Lenin. Notice that he says little and works behind the scenes: Stalin built his power through control of the Party machinery, not through speeches.",
-      "2": "Napoleon and Snowball now oppose each other at every meeting, as Stalin and Trotsky fought over who would succeed Lenin after his death in 1924. Napoleon does not win the arguments - Snowball is the better speaker - but he has taken the puppies away and is training them in secret, just as Stalin quietly built his control of the Party machinery and the secret police. When the dogs are grown he will use them to drive Snowball off the farm, as Stalin expelled Trotsky from the Party in 1927 and exiled him from the USSR in 1929.",
-      "3": "Napoleon has driven Snowball off the farm with his dogs, as Stalin expelled Leon Trotsky from the Party in 1927 and exiled him from the USSR in 1929. The Sunday meetings are cancelled: from now on a committee of pigs decides and the animals are told. Like the Soviet Union after 1929, the farm is ruled by one leader, and open debate is over.",
-      "5": "Napoleon now walks on two legs, wears clothes and drinks with the human farmers. Orwell is pointing at the Tehran Conference of 1943, where Stalin sat down with Churchill and Roosevelt as an equal. The leader of the revolution has become indistinguishable from the tyrants it overthrew."
-    }
+    "text": "Napoleon is a large, fierce-looking Berkshire boar who represents Joseph Stalin. Although he initially supports the rebellion's promise of equality, he gradually becomes a ruthless dictator. His expulsion of Snowball mirrors Stalin's removal of Leon Trotsky, while his trained dogs represent the secret police used to intimidate opponents. Through Squealer's propaganda and changes to the Seven Commandments, Napoleon manipulates the animals and justifies his privileges. His eventual resemblance to the human farmers reveals how completely he has betrayed the revolution. "
   },
   "snowball": {
     "title": "Snowball = Leon Trotsky",
-    "text": {
-      "1": "Snowball is the clever, idealistic pig who plans the windmill, organises committees and leads the animals at the Battle of the Cowshed. He stands for Leon Trotsky, who built the Red Army and led it through the Civil War, and who argued for spreading revolution and industrialising quickly. Like Trotsky, Snowball loses the power struggle to a rival who prefers quiet control to public debate. Once he is driven off the farm, every setback is blamed on him - just as Trotsky, exiled in 1929, became the scapegoat for all of the USSR's failures and was murdered on Stalin's orders in Mexico in 1940.",
-      "2": "Snowball is at the height of his influence: he has drawn up the windmill, he wins every debate at the meetings, and the animals are about to vote his way. Trotsky too was the better speaker and the more brilliant thinker - but Stalin controlled the Party machinery, and that mattered more. Snowball does not know that Napoleon's dogs are almost grown. He is about to be chased off the farm for good, as Trotsky was expelled from the Party in 1927 and exiled in 1929. From then on every failure will be blamed on him, until he is murdered on Stalin's orders in Mexico in 1940."
-    }
+    "text": "Snowball is an intelligent pig who represents Leon Trotsky. He helps lead the rebellion and proposes improvements, including the windmill, which he believes will make life easier for the animals. His struggle with Napoleon reflects the rivalry between Trotsky and Stalin after Lenin's death. When Napoleon uses his dogs to drive Snowball away, this mirrors Trotsky's exile. Napoleon later blames Snowball for the farm's problems, just as Stalin portrayed Trotsky as an enemy of the Soviet Union."
   },
   "squealer": {
     "title": "Squealer = Soviet propaganda",
-    "text": {
-      "1": "Squealer represents the Soviet propaganda machine, above all the Party newspaper Pravda ('Truth'). He is the pigs' explainer: whenever something looks unfair, he turns it into something that sounds reasonable. Listen for 'Surely you don't want Jones back?' - fear of the old regime keeps everyone obedient.",
-      "2": "Squealer argues Napoleon's side of the windmill debate and has figures ready to prove it. This was the role of the Party press, above all Pravda, in the struggle between Stalin and Trotsky in the 1920s: the newspapers were run by Stalin's allies, so Trotsky's arguments reached fewer people and were made to sound reckless. Notice how Squealer brings up Jones again - fear of the old regime is the quickest way to shut a debate down.",
-      "3": "Squealer now rewrites history. Snowball, who fought bravely at the Battle of the Cowshed, is turned into a traitor, and the windmill becomes Napoleon's idea. In the USSR, Trotsky was cut out of photographs and blamed for every failure. Squealer also reads out figures proving production is up, echoing the Five-Year Plan reports that always announced success.",
-      "4": "After the confessions and executions, Squealer's job is to make terror feel normal. He explains that the Commandments never said what the animals remember. Orwell had followed the Moscow show trials (1936-38), where prisoners confessed to impossible crimes; propaganda then made those confessions the official truth.",
-      "5": "Squealer produces lists of figures proving life has never been better, while the animals are hungrier than ever. This is Orwell's picture of a state where language itself has been captured: when the record can be rewritten at will, there is no way left to argue."
-    }
+    "text": "Squealer is a persuasive pig who represents Soviet propaganda and the state-controlled press. He uses misleading statistics, fear, and carefully chosen language to defend Napoleon's decisions. Whenever the pigs contradict the principles of Animalism, Squealer convinces the animals that these changes are necessary for their own good. Through Squealer, Orwell demonstrates how propaganda can distort reality and persuade people to accept their own exploitation."
   },
   "boxer": {
     "title": "Boxer = the loyal working class",
-    "text": {
-      "1": "Boxer stands for the Russian proletariat - the workers and peasants the revolution was supposedly for. He is strong, honest and totally devoted, with the motto 'I will work harder!'. He also cannot learn the alphabet past D: Orwell is showing how a lack of education left the workers unable to question their leaders.",
-      "2": "Boxer throws himself into building the farm up, out before dawn and back after dark. Orwell is showing the genuine enthusiasm of Soviet workers in the years after the revolution, when many believed they were building a new world with their own hands. Their energy and loyalty were real - and that is exactly what the leadership would later turn against them. Listen to how Boxer answers every problem: 'I will work harder!'",
-      "3": "Boxer hauls the stone for the windmill, which stands for Stalin's Five-Year Plans of rapid industrialisation. Soviet workers made huge sacrifices for these projects, urged on by 'hero worker' campaigns such as the Stakhanovite movement. Boxer's new motto, 'Napoleon is always right', shows loyalty to the cause becoming loyalty to one man.",
-      "4": "Boxer is gone. When his lungs gave out, the pigs sold him to the knacker for a case of whisky, while Squealer told everyone he died peacefully in hospital. This is the fate of the workers who built the Soviet state: used up and discarded, their sacrifices turned into someone else's comfort."
-    }
+    "text": "Boxer is a powerful, devoted horse who represents the exploited working class. His determination to work harder makes him essential to the farm, especially during the construction of the windmill. However, his belief that Napoleon is always right prevents him from recognizing how the pigs manipulate him. When he becomes too weak to work, Napoleon sells him to a horse slaughterer rather than providing the retirement he was promised. Through him, Orwell shows how honest labor and devotion can be exploited when they are not accompanied by critical questioning."
   },
   "clover": {
     "title": "Clover = the people who half-remember",
-    "text": {
-      "1": "Clover, the motherly cart-horse, represents ordinary Soviet citizens: loyal, hard-working, and slowly aware that something is wrong. She half-remembers the original Commandments and asks Muriel to read them, but cannot bring herself to believe the leaders would lie. Orwell uses her to show how people can see injustice and still not resist it.",
-      "4": "After the executions Clover looks out over the farm and thinks: this is not what we aimed at. She cannot put her doubts into words, so she keeps working. Orwell gives her the closest thing the book has to a conscience - and shows that a conscience without power changes nothing."
-    }
+    "text": "Clover, the motherly cart-horse, represents ordinary Soviet citizens: loyal, hard-working, and slowly aware that something is wrong. She half-remembers the original Commandments and asks Muriel to read them, but cannot bring herself to believe the leaders would lie. After the executions she looks out over the farm and thinks: this is not what we aimed at - yet she cannot put it into words, so she keeps working. Orwell gives her the closest thing the book has to a conscience, and shows that a conscience without power changes nothing."
   },
   "benjamin": {
     "title": "Benjamin = the silent cynic",
@@ -47,84 +25,50 @@
   },
   "moses": {
     "title": "Moses = the Russian Orthodox Church",
-    "text": {
-      "1": "Moses the raven represents the Russian Orthodox Church. He preaches about Sugarcandy Mountain, a paradise for animals after death. The pigs dislike him because his promise of a reward later makes hardship now easier to accept - which is exactly why Marx called religion 'the opium of the people'. The Bolsheviks attacked the Church after 1917.",
-      "5": "Moses is back, and the pigs now let him stay and give him beer. Stalin reopened churches during the Second World War because religion helped keep people obedient and willing to suffer. A promise of a better life after death is very useful to rulers who cannot deliver one now."
-    }
+    "text": "Moses the raven represents organized religion, particularly the Russian Orthodox Church. His stories about Sugarcandy Mountain promise the animals a peaceful afterlife where their suffering will end. These promises offer comfort but can also encourage them to endure injustice rather than challenge it. Although the pigs initially reject Moses, they later tolerate him, suggesting that rulers may support religion when it helps keep the population obedient."
   },
   "muriel": {
     "title": "Muriel = the literate who do not act",
-    "text": "Muriel the goat reads better than most animals, and it is she who reads the altered Commandments aloud when Clover asks. Each time the words have changed a little: 'No animal shall sleep in a bed WITH SHEETS'. She represents the educated citizens who could see the record being falsified but did not, or could not, do anything about it."
+    "text": "Muriel is a literate goat who represents ordinary people with enough education to recognize signs of deception but limited power to oppose it. She reads the commandments for the other animals and helps them investigate changes to the rules but ultimately she is overwhelmed by fear."
   },
   "sheep": {
     "title": "The sheep = the unthinking crowd",
-    "text": {
-      "1": "The sheep represent the part of the population that repeats whatever it is told. They cannot learn the Seven Commandments, so the slogan 'Four legs good, two legs bad' is made for them. Short slogans, chanted loudly, were a central tool of Soviet propaganda.",
-      "2": "Whenever anyone tries to object at a meeting, the sheep drown them out with bleating. Napoleon uses them to end debate without answering it - the way organised crowds and staged applause were used to silence dissent in the USSR.",
-      "5": "The sheep have been retrained: the slogan is now 'Four legs good, two legs BETTER'. The crowd has been taught to cheer for exactly the thing it once condemned. When the chorus can be reprogrammed, the leadership can do anything."
-    }
+    "text": "The sheep represent unquestioning followers who repeat political slogans without understanding them. Their chanting reduces complicated ideas to simple phrases and prevents meaningful discussion. Because the pigs can easily teach them new slogans, the sheep become a tool for silencing criticism."
   },
   "hen": {
     "title": "The hens = peasants who resisted",
-    "text": {
-      "1": "The hens' eggs are the farm's produce; under Jones they were carted off to market. Now the hens believe they will keep what they lay.",
-      "3": "Napoleon has agreed to sell 400 eggs a week to buy grain. The hens rebel by laying from the rafters so the eggs smash on the floor. This echoes the peasants who resisted Stalin's forced collectivisation (1929-33) by destroying their own crops and livestock rather than hand them over.",
-      "4": "Napoleon starved the hens into surrender by cutting their rations: nine died. Stalin's answer to peasant resistance was far worse - the man-made famine of 1932-33 that killed millions, especially in Ukraine (the Holodomor). Later the hens' leaders 'confess' and are executed, just as the show trials followed the famine.",
-      "5": "The eggs are for sale, and the few hens left say nothing about it. Resistance has been bred out of them."
-    }
+    "text": "The hens represent peasants who resisted Stalin and died. When Napoleon orders them to surrender their eggs for sale, they rebel rather than give up what they have produced. He responds by withholding their food, causing several hens to die. Their suffering reflects the brutal treatment of those who resisted state control of agricultural production and exposes the violence beneath Napoleon's claims to serve all animals."
   },
   "dog": {
-    "title": "The dogs = the secret police (NKVD)",
-    "text": {
-      "3": "Napoleon's nine dogs are the puppies he took away and raised in secret. They represent the Soviet secret police - the Cheka, later the NKVD - which answered to Stalin alone. Their first job was to chase Snowball off the farm, as the security services hunted down Trotsky's supporters.",
-      "4": "The dogs carry out the executions after the forced confessions. This is the Great Purge (1936-38), when Stalin's NKVD arrested and killed hundreds of thousands, including old Bolsheviks who had led the revolution. Notice that the dogs wag their tails at Napoleon exactly as they once did at Mr Jones."
-    }
+    "title": "The dogs = the secret police (NKVD or KGB)",
+    "text": "The dogs represent Stalin's secret police, who protected his authority through surveillance, intimidation, and violence. Napoleon takes them away as puppies and raises them to obey him. They drive Snowball from the farm and carry out Napoleon's executions, resembling the repression and purges under Stalin."
   },
   "puppy": {
-    "title": "The puppies = a private army in the making",
-    "text": "Napoleon takes the newborn puppies away 'to educate them'. Nobody sees them again until they are grown attack dogs loyal only to him. Stalin also built up his personal security apparatus quietly, so that by the time anyone noticed, it was too late to object."
+    "title": "The dogs = the secret police (NKVD or KGB)",
+    "text": "The dogs represent Stalin's secret police, who protected his authority through surveillance, intimidation, and violence. Napoleon takes them away as puppies and raises them to obey him. They drive Snowball from the farm and carry out Napoleon's executions, resembling the repression and purges under Stalin. "
   },
   "pig": {
-    "title": "The pigs = the Party elite",
-    "text": "The pigs as a group represent the Communist Party leadership. They do the 'brainwork', move into the farmhouse and keep the milk and apples for themselves. Orwell's point is not that the pigs were cleverer, but that a new ruling class formed almost at once, using the language of equality to justify its privileges - what Soviet citizens called the nomenklatura."
+    "title": "The pigs = the privileged Soviet ruling class",
+    "text": "The pigs as a group represent the Bolshevik leadership and the privileged Soviet ruling class that develops after the revolution. Their intelligence allows them to organize the rebellion, but they gradually use their authority to claim special treatment. By controlling education, food, and information, they place themselves above the other animals. "
   },
   "cow": {
     "title": "The milk = the first theft",
-    "text": "The cows' milk disappears on the very first day of freedom, stirred into the pigs' mash. Orwell called this the turning point of the whole book: the moment the leaders took something for themselves and everyone else let it happen. In the Soviet Union the new elite began enjoying privileges - better food, flats and special shops - within a few years of the revolution."
+    "text": "The cows represent working producers whose resources are taken by the ruling class. Their milk is reserved for the pigs instead of being shared among the animals. This early inequality reveals that the new leaders are already placing their own comfort above the revolution's promises. "
   },
   "commandments": {
     "title": "The Seven Commandments = the revolution's ideals",
-    "text": {
-      "1": "The Seven Commandments are the farm's constitution, drawn from Old Major's teachings the way Soviet ideology was built on Marx. They start as real ideals: equality, no exploitation, solidarity between all animals. Watch them closely in each phase - every change the pigs make is painted over the old words at night.",
-      "3": "Look closely: a commandment has gained a few words. In the USSR, too, the ideals of 1917 were quietly amended to fit whatever the leadership was doing, and anyone who remembered the original was told they were mistaken.",
-      "5": "Only one commandment is left: 'All animals are equal, but some animals are more equal than others.' The ideals have been rewritten until they mean their opposite. Orwell is describing how the Soviet Constitution of 1936 promised freedoms that did not exist in practice."
-    }
+    "text": "The Seven Commandments represent the revolution's founding principles of equality and the socialist ideals it claims to uphold. Initially, they provide rules intended to prevent animals from behaving like their human oppressors. As the pigs gain power, the commandments are secretly altered to excuse their actions. Eventually, the rules are reduced to a declaration that preserves the language of equality while openly permitting inequality. "
   },
   "flag": {
     "title": "The flag = the Soviet flag",
-    "text": {
-      "1": "The hoof and horn on a green field is the farm's version of the hammer and sickle: the hoof for the workers, the horn for the struggle ahead. Green stands for the fields of England, as red stood for the blood of the workers' revolution.",
-      "2": "Jones's gun is now fired on the anniversary of the Rebellion, like the military parades on Red Square that celebrated the October Revolution. The symbols of the revolution are becoming ceremonies of the state.",
-      "5": "The hoof and horn have been removed; the flag is plain green. In 1943 Stalin dissolved the Comintern and dropped the Internationale, the anthem of world revolution, in favour of a national anthem. The revolutionary symbols were quietly taken down."
-    }
+    "text": "The flagpole and the flag symbolize the revolution's shared identity and its promises of unity. The flag's hoof and horn resemble the Soviet hammer and sickle, replacing the symbols of human workers with those of animals. Ceremonies around the flag encourage loyalty to Animal Farm, even as its leaders betray the principles it originally represented. "
   },
   "windmill": {
     "title": "The windmill = Soviet industrialisation",
-    "text": {
-      "2": "The windmill is Snowball's idea, promising electricity and a three-day week. Napoleon opposes it now - and once Snowball is gone he will adopt it as his own, just as Stalin attacked Trotsky's plans for rapid industrialisation and then carried them out as his own Five-Year Plans from 1928.",
-      "3": "Napoleon announced that the windmill would be built after all, and Squealer explained it had been his idea from the start. Stalin did the same: he attacked Trotsky's programme of rapid industrialisation, and once Trotsky was gone he carried it out as his own Five-Year Plans from 1928. The animals now work a sixty-hour week - 'voluntarily' - as Soviet workers did for the Plan.",
-      "4": "Frederick's men have blown the windmill up with blasting powder, and the animals are rebuilding it at once. Frederick stands for Hitler's Germany: Napoleon sold him timber (the Nazi-Soviet Pact of 1939), Frederick paid with forged banknotes and then attacked - Germany's invasion of the USSR in 1941. Rebuilding the windmill on reduced rations echoes the enormous wartime effort demanded of Soviet workers.",
-      "5": "The windmill is finished at last, but it grinds corn for sale instead of lighting the stalls as promised. Soviet industrialisation succeeded on paper while ordinary lives got no easier."
-    }
+    "text": "The windmill represents Soviet industrialization. It is presented as a project that will reduce labor and bring prosperity, encouraging the animals to make enormous sacrifices. Instead, its construction brings exhausting work and hardship while strengthening the pigs' control. Napoleon first rejects Snowball's proposal and later claims it as his own, demonstrating how leaders can rewrite the past to take credit for others' ideas. The windmill ultimately illustrates how promises of future progress can be used to justify suffering in the present."
   },
   "farmhouse": {
     "title": "The farmhouse = the Kremlin",
-    "text": {
-      "1": "The animals agree to keep Jones's house as a museum: no animal shall ever live there. In 1917 the Bolsheviks took over the tsar's palaces and the Kremlin in the same spirit - as property of the people.",
-      "2": "Nobody lives in the farmhouse yet, but the pigs have begun holding their meetings inside, where Napoleon and Snowball argue over the windmill. The Bolshevik leadership met in the Kremlin in the same way, and the struggle between Stalin and Trotsky was fought out in its committee rooms rather than in front of the people. The museum is quietly becoming a seat of government.",
-      "3": "The pigs have moved in and sleep in the beds. The Commandment now reads 'No animal shall sleep in a bed with sheets'. The Kremlin became the home of the new rulers, cut off from the people they governed.",
-      "4": "The curtains are drawn and the dogs guard the door. Napoleon is rarely seen now; his orders come through Squealer. Stalin too withdrew behind the Kremlin walls, appearing only at parades, while the executions of the Great Purge were carried out in his name.",
-      "5": "Through the window you will see pigs and men drinking together, then quarrelling over cards. Orwell wrote this scene about the Tehran Conference of 1943 and predicted, correctly, that the alliance between Stalin and the West would not last."
-    }
+    "text": "The farmhouse symbolizes the wealth, privilege, and separation of the ruling class. At first, the animals agree that no one should live there, since it represents Jones's comfortable life at their expense. When the pigs move in and adopt human habits, they take over the privileges they once condemned."
   }
 }

@@ -30,6 +30,9 @@ DEFAULT_PHASE_QUESTION = "Go to the next phase?"
 class Game:
     CREDITS_SPEED = 20       # logical px per second the credits roll
     TRANSITION_TIME = 4.0    # seconds before a phase transition card dismisses itself
+    SCROLL_STEP = 24         # logical px per Up/Down tap in the allegory panel
+    SCROLL_SPEED = 90        # logical px/s while Up/Down is held
+    SCROLL_EASE = 14         # how quickly the panel catches up with the scroll target
     ALLEGORY_SLIDE_TIME = 0.25
 
     def __init__(self):
@@ -55,7 +58,9 @@ class Game:
         self.allegory_key = None
         self.allegory_open = False
         self.allegory_t = 0.0        # 0 = closed, 1 = fully slid in
-        self.allegory_scroll = 0
+        self.allegory_scroll = 0        # target offset (px)
+        self.allegory_scroll_pos = 0.0  # displayed offset, eases toward the target
+        self.allegory_hold = 0.0        # seconds Up/Down has been held
         self.allegory_overflow = 0
         self.camera = Camera(
             LOGICAL_WIDTH, LOGICAL_HEIGHT,
@@ -155,6 +160,9 @@ class Game:
         pick = max((p for p in phases if p <= self.phase), default=None)
         return by_phase[str(pick)] if pick is not None else ["..."]
 
+    def _scroll_allegory(self, delta):
+        self.allegory_scroll = max(0, min(self.allegory_overflow, self.allegory_scroll + delta))
+
     def _allegory_content(self):
         entry = self.allegory.get(self.allegory_key)
         if entry is None:
@@ -177,17 +185,15 @@ class Game:
             if key in (pygame.K_q, pygame.K_ESCAPE):
                 self.allegory_open = False
             elif key in (pygame.K_UP, pygame.K_w):
-                self.allegory_scroll = max(
-                    0, self.allegory_scroll - 24 * SCALE)
+                self._scroll_allegory(-self.SCROLL_STEP * SCALE)
             elif key in (pygame.K_DOWN, pygame.K_s):
-                self.allegory_scroll = min(
-                    self.allegory_overflow,
-                    self.allegory_scroll + 24 * SCALE)
+                self._scroll_allegory(self.SCROLL_STEP * SCALE)
             return
         if key == pygame.K_q:
             if self.state in ("dialogue", "scene") and self.allegory_key:
                 self.allegory_open = True
                 self.allegory_scroll = 0
+                self.allegory_scroll_pos = 0.0
             return
         if key in INTERACT_KEYS:
             if self.state == "explore":
@@ -217,9 +223,7 @@ class Game:
         ):
             self.confirm_choice = 1 - self.confirm_choice
         elif key == pygame.K_ESCAPE:
-            if self.state in ("explore", "end"):
-                self.running = False
-            elif self.state == "scene":
+            if self.state == "scene":
                 self._close_scene()
             elif self.state in ("dialogue", "transition", "confirm"):
                 self.state = "explore"
@@ -301,6 +305,21 @@ class Game:
             self.allegory_t = min(target, self.allegory_t + step)
         elif self.allegory_t > target:
             self.allegory_t = max(target, self.allegory_t - step)
+        if self.allegory_open:
+            # Holding Up/Down keeps scrolling after a short delay; the drawn
+            # offset eases toward the target so steps glide instead of jumping.
+            keys = pygame.key.get_pressed()
+            direction = (keys[pygame.K_DOWN] or keys[pygame.K_s]) - (keys[pygame.K_UP] or keys[pygame.K_w])
+            if direction:
+                self.allegory_hold += self.dt
+                if self.allegory_hold > 0.3:
+                    self._scroll_allegory(direction * self.SCROLL_SPEED * SCALE * self.dt)
+            else:
+                self.allegory_hold = 0.0
+        k = min(1.0, self.SCROLL_EASE * self.dt)
+        self.allegory_scroll_pos += (self.allegory_scroll - self.allegory_scroll_pos) * k
+        if abs(self.allegory_scroll - self.allegory_scroll_pos) < 0.5:
+            self.allegory_scroll_pos = float(self.allegory_scroll)
         if self.state == "end":
             # Roll the credits up until the last line rests mid-screen.
             end = ui.credits_height(self.credits, SCALE) + WINDOW_HEIGHT / 2
@@ -380,7 +399,7 @@ class Game:
             if content:
                 self.allegory_overflow = ui.draw_allegory_panel(
                     self.window, *content, self.allegory_t,
-                    self.allegory_scroll, SCALE,
+                    round(self.allegory_scroll_pos), SCALE,
                 )
 
         pygame.display.flip()
