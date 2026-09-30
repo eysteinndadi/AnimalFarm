@@ -145,6 +145,14 @@ class Game:
         self.allegory_t = 0.0
         self.allegory_scroll = 0
 
+    def _lines_for(self, dialogue_id):
+        # Like the allegory text: use the most recent phase that has lines,
+        # so a character need not repeat unchanged dialogue in every phase.
+        by_phase = self.dialogues.get(dialogue_id, {})
+        phases = sorted(int(p) for p in by_phase)
+        pick = max((p for p in phases if p <= self.phase), default=None)
+        return by_phase[str(pick)] if pick is not None else ["..."]
+
     def _allegory_content(self):
         entry = self.allegory.get(self.allegory_key)
         if entry is None:
@@ -229,9 +237,7 @@ class Game:
         for npc in self.npcs:
             if npc.mobile and front in npc.occupied_tiles:
                 npc.face_toward(self.player.tile_x)
-                lines = self.dialogues.get(npc.dialogue_id, {}).get(
-                    str(self.phase), ["..."]
-                )
+                lines = self._lines_for(npc.dialogue_id)
                 self.dialogue = DialogueSession(npc.name, lines)
                 self.state = "dialogue"
                 self._set_allegory(npc.dialogue_id)
@@ -241,9 +247,7 @@ class Game:
             return
         kind = action["type"]
         if kind == "dialogue":
-            lines = self.dialogues.get(action["id"], {}).get(
-                str(self.phase), ["..."]
-            )
+            lines = self._lines_for(action["id"])
             self.dialogue = DialogueSession(action["speaker"], lines)
             self.state = "dialogue"
             self._set_allegory(action["id"])
