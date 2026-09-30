@@ -33,11 +33,11 @@
     "5": ["All animals are equal. Some are simply more equal than others."]
   },
   "snowball": {
-    "1": ["Comrade! Have you seen my plans for the windmill? We will have a three day week!", "There will be light in the barn, warmth in winter, and time to learn to read."],
-    "2": ["Have you seen my plans, comrade? Napoleon calls them nonsense, but on Sunday the animals will vote, and they will vote for the windmill.", "Vote for Snowball and the three-day week! Though... have you noticed Napoleon slips away from every meeting? Always off somewhere with those puppies of his."]
+    "1": ["What committee should you be in... the Whiter Wool movement? No maybe the Egg Production committee, Clean Tails League or Wild comrades Re-education committe? I will need to think about this... "],
+    "2": ["Have you seen my plans comrade? Soon the animals will vote and they need to vote for the windmill.", "Vote for Snowball and the three-day week!"]
   },
   "napoleon": {
-    "1": ["The revolution has only begun, comrade."],
+    "1": ["The revolution has only begun comrade."],
     "2": ["Snowball's windmill is nonsense. It would take a year to build, and in the meantime we would all starve.", "Vote for Napoleon and the full manger, comrade."],
     "3": ["The farm needs order. My dogs will keep us safe.", "The windmill will be built. Bring stone."],
     "4": ["You have questions? Squealer speaks for me."],
