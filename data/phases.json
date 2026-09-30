@@ -62,11 +62,10 @@
       {"name": "Cow", "id": "cow", "at": [17, 22], "sprite": "assets/characters/cow.png", "faces_right": true, "w": 2, "wander": [4, 18, 18, 23], "idle": [2, 6]},
       {"name": "Boxer", "id": "boxer", "at": [51, 33], "color": [120, 80, 50], "sprite": "assets/characters/boxer.png", "faces_right": true, "w": 2},
       {"name": "Muriel", "id": "muriel", "at": [5, 35], "sprite": "assets/characters/goat_still.png", "sprite_moving": "assets/characters/goat_moving.png", "patrol": [[5, 35], [14, 35]]},
-      {"name": "Clover", "id": "clover", "at": [22, 33], "color": [160, 120, 90]},
       {"name": "Napoleon", "id": "napoleon", "at": [32, 30], "sprite": "assets/characters/napoleon.png"},
-      {"name": "Snowball", "id": "snowball", "at": [26, 30], "color": [235, 200, 205]},
+      {"name": "Snowball", "id": "snowball", "at": [26, 30], "sprite": "assets/characters/Snowball.png"},
       {"name": "Moses", "id": "moses", "at": [16, 36], "sprite": "assets/characters/crow.png", "fly": [19, 26, 40, 37]},
-      {"name": "Squealer", "id": "squealer", "at": [34, 31], "color": [240, 180, 180]}
+      {"name": "Squealer", "id": "squealer", "at": [34, 31], "sprite": "assets/characters/squealer.png"}
     ]
   },
   "2": {
@@ -133,16 +132,15 @@
       {"name": "Cow", "id": "cow", "at": [17, 22], "sprite": "assets/characters/cow.png", "faces_right": true, "w": 2, "wander": [4, 18, 18, 23], "idle": [2, 6]},
       {"name": "Boxer", "id": "boxer", "at": [51, 33], "color": [120, 80, 50], "sprite": "assets/characters/boxer.png", "faces_right": true, "w": 2},
       {"name": "Muriel", "id": "muriel", "at": [5, 35], "sprite": "assets/characters/goat_still.png", "sprite_moving": "assets/characters/goat_moving.png", "patrol": [[5, 35], [14, 35]]},
-      {"name": "Clover", "id": "clover", "at": [19, 41], "color": [160, 120, 90]},
       {"name": "Napoleon", "id": "napoleon", "at": [32, 30], "sprite": "assets/characters/napoleon.png"},
-      {"name": "Snowball", "id": "snowball", "at": [26, 30], "color": [235, 200, 205], "look": "right"},
-      {"name": "Squealer", "id": "squealer", "at": [32, 47], "color": [240, 180, 180]},
+      {"name": "Snowball", "id": "snowball", "at": [26, 30], "sprite": "assets/characters/Snowball.png", "look": "right"},
+      {"name": "Squealer", "id": "squealer", "at": [32, 47], "sprite": "assets/characters/squealer.png"},
       {"name": "Dog", "id": "puppy", "at": [27, 47], "sprite": "assets/characters/puppy.png", "faces_right": true, "look": "right"},
       {"name": "Dog", "id": "puppy", "at": [30, 47], "sprite": "assets/characters/puppy.png", "faces_right": true}
     ]
   },
   "3": {
-    "transition": "The dogs drove Snowball from the farm. Work on the windmill began...",
+    "transition": "The dogs drove Snowball from the farm.",
     "spawn": [
       28,
       52
@@ -206,9 +204,8 @@
       {"name": "Cow", "id": "cow", "at": [17, 22], "sprite": "assets/characters/cow.png", "faces_right": true, "w": 2, "wander": [4, 18, 18, 23], "idle": [2, 6]},
       {"name": "Boxer", "id": "boxer", "at": [47, 10], "color": [120, 80, 50], "sprite": "assets/characters/boxer.png", "faces_right": true, "w": 2},
       {"name": "Muriel", "id": "muriel", "at": [5, 35], "sprite": "assets/characters/goat_still.png", "sprite_moving": "assets/characters/goat_moving.png", "patrol": [[5, 35], [14, 35]]},
-      {"name": "Clover", "id": "clover", "at": [19, 41], "color": [160, 120, 90]},
       {"name": "Napoleon", "id": "napoleon", "at": [25, 47], "sprite": "assets/characters/napoleon.png"},
-      {"name": "Squealer", "id": "squealer", "at": [32, 47], "color": [240, 180, 180]},
+      {"name": "Squealer", "id": "squealer", "at": [32, 47], "sprite": "assets/characters/squealer.png"},
       {"name": "Dog", "id": "dog", "at": [26, 47], "sprite": "assets/characters/dog.png", "faces_right": true, "w": 2, "look": "right"},
       {"name": "Dog", "id": "dog", "at": [30, 47], "sprite": "assets/characters/dog.png", "faces_right": true, "w": 2}
     ]
@@ -230,10 +227,10 @@
     ],
     "props": [
       {"name": "barn", "at": [5, 30], "w": 10, "h": 5, "sprite": "assets/buildings/barn.png", "shadow": 4, "interact": {"event": "commandments"}},
-      {"name": "stables", "at": [48, 30], "w": 8, "h": 3, "sprite": "assets/buildings/stables.png", "shadow": 4, "interact": {"event": "message", "text": "Boxer's stall. His breathing is heavy even in sleep."}},
+      {"name": "stables", "at": [48, 30], "w": 8, "h": 3, "sprite": "assets/buildings/stables.png", "shadow": 4, "interact": {"event": "message", "text": "Boxer's stall is empty. A van came for him yesterday. Squealer says he has been taken to the hospital in Willingdon.", "allegory": "boxer"}},
       {"name": "flagpole", "at": [29, 30], "w": 1, "h": 1, "sprite": "assets/props/flag.png", "frame_w": 24, "frame": 2, "interact": {"event": "advance_phase", "text": "The flag is still here, although Napoleon now keeps the gun inside the farmhouse.", "allegory": "flag"}},
       {"name": "farmhouse", "at": [24, 41], "w": 10, "h": 6, "sprite": "assets/buildings/farmhouse_light.png", "shadow": 4, "interact": {"event": "message", "text": "The curtains are drawn. Laughter and clinking glasses drift from inside.", "allegory": "farmhouse"}},
-      {"name": "windmill_ruins", "at": [49, 8], "w": 3, "h": 1, "sprite": "assets/buildings/vindmylla-sprungin.png", "interact": {"event": "message", "text": "The windmill lies in ruins. No one agrees on why.", "allegory": "windmill"}},
+      {"name": "windmill_ruins", "at": [49, 8], "w": 3, "h": 1, "sprite": "assets/buildings/vindmylla-sprungin.png", "interact": {"event": "message", "text": "The ruins of the windmill. Frederick's men blew it up with blasting powder. The animals have already begun hauling stone to build it a second time.", "allegory": "windmill"}},
       {"name": "henhouse", "at": [49, 18], "w": 3, "h": 2, "sprite": "assets/buildings/henhouse.png", "anchor": "center", "shadow": 3, "shadow_under": true, "interact": {"event": "message", "text": "The henhouse. Nine roosts stand empty.", "allegory": "hen"}},
       {"name": "tree", "at": [14, 27], "w": 1, "h": 1, "sprite": "assets/props/tree1.png", "anchor": "center"},
       {"name": "tree", "at": [3, 40], "w": 1, "h": 1, "sprite": "assets/props/tree1.png", "anchor": "center"},
@@ -266,10 +263,8 @@
       {"name": "Hen", "id": "hen", "at": [52, 22], "sprite": "assets/characters/hen.png", "faces_right": true, "wander": [49, 18, 55, 25], "hop": true},
       {"name": "Cow", "id": "cow", "at": [14, 19], "sprite": "assets/characters/cow.png", "faces_right": true, "w": 2, "wander": [4, 18, 18, 23], "idle": [2, 6]},
       {"name": "Cow", "id": "cow", "at": [7, 23], "sprite": "assets/characters/cow.png", "faces_right": true, "w": 2, "wander": [4, 18, 18, 23], "idle": [2, 6]},
-      {"name": "Boxer", "id": "boxer", "at": [51, 33], "color": [120, 80, 50], "sprite": "assets/characters/boxer.png", "faces_right": true, "w": 2},
       {"name": "Muriel", "id": "muriel", "at": [5, 35], "sprite": "assets/characters/goat_still.png", "sprite_moving": "assets/characters/goat_moving.png", "patrol": [[5, 35], [14, 35]]},
-      {"name": "Clover", "id": "clover", "at": [22, 40], "color": [160, 120, 90]},
-      {"name": "Squealer", "id": "squealer", "at": [31, 31], "color": [240, 180, 180]},
+      {"name": "Squealer", "id": "squealer", "at": [31, 31], "sprite": "assets/characters/squealer.png"},
       {"name": "Dog", "id": "dog", "at": [26, 47], "sprite": "assets/characters/dog.png", "faces_right": true, "w": 2, "look": "right"},
       {"name": "Dog", "id": "dog", "at": [30, 47], "sprite": "assets/characters/dog.png", "faces_right": true, "w": 2},
       {"name": "Dog", "id": "dog", "at": [46, 8], "sprite": "assets/characters/dog.png", "faces_right": true, "w": 2, "look": "right"},
@@ -296,7 +291,7 @@
     ],
     "props": [
       {"name": "barn", "at": [5, 30], "w": 10, "h": 5, "sprite": "assets/buildings/barn.png", "shadow": 4, "interact": {"event": "commandments"}},
-      {"name": "stables", "at": [48, 30], "w": 8, "h": 3, "sprite": "assets/buildings/stables.png", "shadow": 4, "interact": {"event": "message", "text": "Boxer's stall stands empty. No one speaks of where he went."}},
+      {"name": "stables", "at": [48, 30], "w": 8, "h": 3, "sprite": "assets/buildings/stables.png", "shadow": 4, "interact": {"event": "message", "text": "Boxer's stall stands empty. No one speaks of where he went.", "allegory": "boxer"}},
       {"name": "flagpole", "at": [29, 30], "w": 1, "h": 1, "sprite": "assets/props/flag.png", "frame_w": 24, "frame": 3, "interact": {"event": "message", "text": "The flag is still here, although the hoof and horn are now gone from it.", "allegory": "flag"}},
       {"name": "farmhouse", "at": [24, 41], "w": 10, "h": 6, "sprite": "assets/buildings/farmhouse_light.png", "shadow": 4, "interact": [{"event": "ending", "tiles": [[28, 46], [29, 46]], "allegory": "farmhouse"}, {"event": "message", "text": "The door is for pigs and men now.", "tiles": [[24, 46], [25, 46], [26, 46], [27, 46], [30, 46], [31, 46], [32, 46], [33, 46]], "allegory": "farmhouse"}]},
       {"name": "windmill", "at": [49, 8], "w": 3, "h": 1, "sprite": "assets/buildings/vindmylla-bukur-final.png", "spin": {"sprite": "assets/buildings/vindmylla-spadar-Final.png", "speed": 45, "pivot": [24, 27]}, "interact": {"event": "message", "text": "The windmill stands complete, its sails turning slowly.", "allegory": "windmill"}},
@@ -333,11 +328,11 @@
       {"name": "Cow", "id": "cow", "at": [14, 19], "sprite": "assets/characters/cow.png", "faces_right": true, "w": 2, "wander": [4, 18, 18, 23], "idle": [2, 6]},
       {"name": "Cow", "id": "cow", "at": [7, 23], "sprite": "assets/characters/cow.png", "faces_right": true, "w": 2, "wander": [4, 18, 18, 23], "idle": [2, 6]},
       {"name": "Muriel", "id": "muriel", "at": [5, 35], "sprite": "assets/characters/goat_still.png", "sprite_moving": "assets/characters/goat_moving.png", "patrol": [[5, 35], [14, 35]]},
-      {"name": "Clover", "id": "clover", "at": [22, 33], "color": [160, 120, 90]},
-      {"name": "Pig", "id": "pig", "at": [25, 47], "color": [235, 160, 160]},
-      {"name": "Pig", "id": "pig", "at": [32, 47], "color": [235, 160, 160]},
+      {"name": "Pig", "id": "pig", "at": [25, 47], "sprite": "assets/characters/pig_standing.png"},
+      {"name": "Pig", "id": "pig", "at": [32, 47], "sprite": "assets/characters/pig_standing.png"},
       {"name": "Moses", "id": "moses", "at": [16, 36], "sprite": "assets/characters/crow.png", "fly": [19, 26, 40, 37]},
-      {"name": "Squealer", "id": "squealer", "at": [30, 32], "color": [240, 180, 180]},
+      {"name": "Squealer", "id": "squealer", "at": [30, 32], "sprite": "assets/characters/squealer_standing.png"},
+      {"name": "Napoleon", "id": "napoleon", "at": [27, 47], "sprite": "assets/characters/napoleon_standing.png"},
       {"name": "Dog", "id": "dog", "at": [25, 51], "sprite": "assets/characters/dog.png", "faces_right": true, "w": 2, "look": "right"},
       {"name": "Dog", "id": "dog", "at": [31, 51], "sprite": "assets/characters/dog.png", "faces_right": true, "w": 2}
     ]

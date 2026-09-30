@@ -29,6 +29,7 @@ DEFAULT_PHASE_QUESTION = "Go to the next phase?"
 
 class Game:
     CREDITS_SPEED = 20       # logical px per second the credits roll
+    TRANSITION_TIME = 4.0    # seconds before a phase transition card dismisses itself
     ALLEGORY_SLIDE_TIME = 0.25
 
     def __init__(self):
@@ -71,6 +72,7 @@ class Game:
         self.confirm_question = DEFAULT_PHASE_QUESTION
         self.confirm_choice = 0
         self.transition_text = ""
+        self.transition_timer = 0.0
         self.load_phase(1)
 
     def load_phase(self, phase):
@@ -287,6 +289,7 @@ class Game:
         self.load_phase(next_phase)
         cfg = self.phases[str(next_phase)]
         self.transition_text = cfg.get("transition", "Time passed...")
+        self.transition_timer = self.TRANSITION_TIME
         self.state = "transition"
 
     def update(self):
@@ -304,6 +307,10 @@ class Game:
             self.credits_scroll = min(
                 self.credits_scroll + self.CREDITS_SPEED * SCALE * self.dt, end
             )
+        if self.state == "transition":
+            self.transition_timer -= self.dt
+            if self.transition_timer <= 0:
+                self.state = "explore"
         if self.state != "explore":
             return
         patrolling = [npc for npc in self.npcs if npc.mobile]
