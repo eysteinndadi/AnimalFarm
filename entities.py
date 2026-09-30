@@ -25,9 +25,10 @@ class Prop:
     opaque stretches of the bottom row (skipping doorways and gaps);
     `shadow_under` instead spans the whole width and tucks 1px up under
     the sprite, for buildings on stilts.
-    `spin={"sprite": path, "speed": deg_per_sec}` overlays a second image
-    (same canvas size as the main sprite) that rotates about the centre
-    of its opaque pixels - e.g. windmill sails on top of the tower.
+    `spin={"sprite": path, "speed": deg_per_sec, "pivot": [x, y]}` overlays
+    a second image that rotates about the centre of its opaque pixels, pinned
+    to `pivot` on the main sprite - e.g. windmill sails on top of the tower.
+    Without `pivot` the overlay is assumed to share the main sprite's canvas.
     """
 
     SHADOW_ALPHA = 120
@@ -55,7 +56,7 @@ class Prop:
         if spin and self.image:
             overlay = assets.load_image(spin["sprite"])
             bounds = overlay.get_bounding_rect()
-            self.spin_pivot = bounds.center
+            self.spin_pivot = tuple(spin.get("pivot", bounds.center))
             # Crop to a square around the pivot so rotation keeps it centred.
             r = max(bounds.width, bounds.height) // 2 + 1
             square = pygame.Surface((2 * r + 1, 2 * r + 1), pygame.SRCALPHA)
